@@ -1,0 +1,151 @@
+{
+  "signin": "Logga in", 
+  "signup": "Bli Medlem", 
+
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über"
+  },
+  "page": {
+    "home": {
+      "title": "Willkommen bei NextJs i18n",
+      "description": "Internationalisierung im NextJs 13 App-Router"
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Dies ist die About-Seite"
+    }
+  },
+  "banner":{
+    "title": "VILL DU NJUTA AV ETT FUNKANDE RENT HEM ? ", 
+    "subtext": "Skippa stressen – låt våra fantastiska städare skapa städmagi istället. \n 💙 \n Med en 100 % kundnöjdhetsgaranti och ett betyg på 4,8/5 lovar vi att du inte kommer att ångra dig! ",
+    "bannerButton": "Se städtider",
+    "size": "Hemstorlek", 
+    "postcode": "Postnummer"
+  },
+  "section":{
+    "title": "Glansandehem - MER ÄN BARA HEMSTÄDNING",
+    "subtitle":"Vårt uppdrag är att skapa jobb och möjligheter för städare, samtidigt som du skapar frihet i ditt liv. Tillsammans med våra kunder har vi redan skapat arbete åt tusentals städare som i sin tur har städat mer än 1 000 000 hem."
+  },
+  "accordionTitle":{
+    "title": "DETTA INGÅR I STÄDINGEN", 
+    "subtext":"SE VAD INGÅR I VÅR GRUNDTJÄNST.",
+    "textinfo": "Hur mycket hemstädning kostar beror på vilken frekvens du vill ha på städningen. Tiden det tar att utföra städningen i just ditt hem har att göra med hur stort ditt hem är.\n\n Vår personal tar med städprodukter och trasor. Vi lämnar trasorna hos dig efter din första städning, så att du kan tvätta dem själv till nästa städning. \n\n Det du behöver hemma är en mopp, hink och dammsugare. Vi vill också att du innan din städning berättar vilka områden du vill att vi lägger extra vikt på i ditt hem."
+  },
+  "accordion":[
+    {
+      "question": "What is artificial intelligence (AI)?",
+      "answer":
+        "Artificial Intelligence (AI) refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation."
+    },
+    {
+      "question": "How does machine learning differ from traditional programming?",
+      "answer":
+        "In traditional programming, explicit instructions are provided to a computer to perform a task. In contrast, machine learning allows computers to learn from data and improve their performance over time without being explicitly programmed, making it well-suited for complex, data-driven tasks."
+    },
+    {
+      "question": "What are the potential ethical concerns associated with AI?",
+      "answer":
+        "Ethical concerns in AI include issues related to bias in algorithms, privacy implications, job displacement, and the responsible use of autonomous systems. Addressing these concerns requires a combination of technical advancements, policy development, and ongoing collaboration between industry, academia, and regulatory bodies."
+    },
+    {
+      "question":
+        "How can businesses benefit from implementing NLP technology?",
+      "answer":
+        "Natural Language Processing (NLP) enables computers to understand, interpret, and generate human language, facilitating communication between humans and machines. Businesses can benefit from NLP by automating customer support, analyzing customer feedback, extracting insights from unstructured data, and improving overall efficiency in handling language-based tasks."
+    }
+  ],
+  "slider":[
+    {
+      "id":1,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468244/Flowentech/home_gbmuzv.png",
+      "title" : "Home Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":2,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468385/Flowentech/window_oafufn.png",
+      "title" : "Window Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":3,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468225/Flowentech/moving_zskqyc.png",
+      "title" : "Moving Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":4,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468229/Flowentech/office_sffpu3.png",
+      "title" : "Office Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":5,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468235/Flowentech/property_hfzvoy.png",
+      "title" : "Property Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":6,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468240/Flowentech/deep_iu0xpo.png",
+      "title" : "Deep Cleaning",
+      "subtitle":""
+    }
+  ],
+
+
+
+
+  "serviceStepper": "Service",
+  "dateandtime":"DATUM TID",
+  "address": "ADRESS",
+  "payment": "BETALNING",
+  "overview":"Översikt",
+  "cleaning": "Rengöring",
+  "home_cleaning":"HEMSTÄDNING",
+  "cleaning_duration":"Rengöringstid",
+
+  "service":{
+    "tellus":"Berätta för oss om dina städbehov",
+    "apartment": "Lägenhetsstorlek",
+    "cleaningDuration":"Rengöringstid" ,
+    "enter_apartment":"Ange din lägenhetsstorlek",
+    "hourse":"timmar",
+    "recommendation":"timmar (rekommendation)",
+    "HowOften": "Hur ofta ska vi städa?", 
+    "with_glansandehem":"Med Glansandehem får du en vanlig städare !",
+    "mostpopular":"Mest populär", 
+    "ecofriendly_supplies":"Miljövänliga städmaterial", 
+    "eco_info":"miljövänliga och allergivänliga städmaterial ingår i din beställning! Har du en dammsugare, hink & mopp? Vi använder dem.",
+    "home_clean": "Hemstädning",
+    "before_rut": "Före RUT-avdrag", 
+    "cleaning":"Rengöring",
+    "where": "Var kommer vi för att rengöra?",
+    "without":"utan RUT-avdrag"
+  },
+  "datetime":{
+    "pets":"Husdjur bor här", 
+    "what_kind":"Vilken sort? Låt oss välja en städare utan allergier", 
+    "dateandtime":"Datum och Tid"
+  },
+  "address_":{
+    "our_dedicated":"Vårt engagerade kundvårdsteam är alltid här för att hjälpa och kommer att göra säker på att du är 100% nöjd!",
+    "fullname":"Fullständiga namn",
+    "enter_fullname":"Ange ditt fullständiga namn", 
+    "email": "E-post", 
+    "enter_email": "Ange din e-postadress", 
+    "identity": " Personnummer", 
+    "enter_identity": "Ange ditt personnummer", 
+    "phone": "Telefonnummer", 
+    "enter_phone": "Skriv in ditt telefonnummer", 
+    "how_rut": "Hur RUT-avdrag fungerar", 
+    "rut_deduction": "Svenska skattebetalare har rätt till 50 % rabatt på hemarbete. Ange ditt personnummer - och njut av RUT-avdrag direkt!", 
+    "gift_coupon": "Presentkort eller kupong", 
+    "apply": "Använd kupong", 
+    "accept": "Jag accepterar villkor och integritetspolicy"
+  }, 
+  "back": "Tillbaka", 
+  "next": "Nästa",
+  "submit":"Skicka in"
+}

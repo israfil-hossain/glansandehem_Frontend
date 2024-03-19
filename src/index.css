@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* gradient  */
+.violet-gradient {
+    background: #6408bf;
+    background: linear-gradient(240deg, rgb(169, 165, 252)10%, rgb(255, 255, 255)100%);
+
+}
+
+
+/* hide arrow for input type text */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* for firefox  */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    scroll-behavior: smooth;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* scrollbar setting  */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #5c01cc #70018f;
+    scroll-behavior: smooth;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #5c01cc, #70018f);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #028c5e, #70018f);
+}
+
+::-webkit-scrollbar-track {
+    background-color: linear-gradient(to bottom, #1c003f, #520c66);
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px;
+    background-color: #000552;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 30%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000552 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  
+}

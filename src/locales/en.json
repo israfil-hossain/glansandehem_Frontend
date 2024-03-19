@@ -1,0 +1,153 @@
+{
+  "Welcome to React": "Welcome to the english template",
+  "Solution": "A solution to Vite projects localization.",
+  "Documentation": "Consult the README file to learn how to use.",
+  "Developer": "Developed with ♥ by ",
+  "test": "This is a template component",
+  
+  "signin": "Sign In", 
+  "signup": "Sign Up", 
+  "navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "page": {
+    "home": {
+      "title": "Welcome to NextJs i18n",
+      "description": "Internationalization in NextJs 13 App router"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is the about page"
+    }
+  }, 
+  "banner":{
+    "title": "DO YOU WANT TO ENJOY A SPARKLING CLEAN HOME ? ", 
+    "subtext": "Skip the stress- let our fantastic cleaners create cleaning magic instead.<br> 💙 <br> With a 100% customer satisfaction guarantee and a 4.8/5 rating, we promise you won't regret it ! ",
+    "bannerButton": "See cleaning times", 
+    "size": "Home size", 
+    "postcode": "Postcode"
+  },
+  "section":{
+    "title": "Glansandehem - MORE THAN JUST HOME CLEANING",
+    "subtitle":"Our mission is to create jobs and opportunities for cleaners, while creating freedom in your life. Together with our customers, we have already created work for thousands of cleaners who in turn have cleaned more than 1,000,000 homes."
+  }, 
+  "accordionTitle":{
+    "title": "THIS IS INCLUDED IN THE CLEANING", 
+    "subtext":"SEE WHAT IS INCLUDED IN OUR BASIC SERVICE.",
+    "textinfo": "How much home cleaning costs depends on the frequency you want for the cleaning. The time it takes to carry out the cleaning at your particular home has to do with how big your home is.\n\n Our staff brings cleaning products and rags. We leave the rags with you after your first cleaning, so that you can wash them yourself for the next cleaning. \n\n What you need at home is a mop, bucket and vacuum cleaner. We would also like you to tell us, before your cleaning, which areas you want us to put extra emphasis on in your home."
+  },
+  "accordion":[
+    {
+      "question": "What is artificial intelligence (AI)?",
+      "answer":
+        "Artificial Intelligence (AI) refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation."
+    },
+    {
+      "question": "How does machine learning differ from traditional programming?",
+      "answer":
+        "In traditional programming, explicit instructions are provided to a computer to perform a task. In contrast, machine learning allows computers to learn from data and improve their performance over time without being explicitly programmed, making it well-suited for complex, data-driven tasks."
+    },
+    {
+      "question": "What are the potential ethical concerns associated with AI?",
+      "answer":
+        "Ethical concerns in AI include issues related to bias in algorithms, privacy implications, job displacement, and the responsible use of autonomous systems. Addressing these concerns requires a combination of technical advancements, policy development, and ongoing collaboration between industry, academia, and regulatory bodies."
+    },
+    {
+      "question":
+        "How can businesses benefit from implementing NLP technology?",
+      "answer":
+        "Natural Language Processing (NLP) enables computers to understand, interpret, and generate human language, facilitating communication between humans and machines. Businesses can benefit from NLP by automating customer support, analyzing customer feedback, extracting insights from unstructured data, and improving overall efficiency in handling language-based tasks."
+    }
+  ], 
+  "slider":[
+    {
+      "id":1,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468244/Flowentech/home_gbmuzv.png",
+      "title" : "Home Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":2,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468385/Flowentech/window_oafufn.png",
+      "title" : "Window Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":3,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468225/Flowentech/moving_zskqyc.png",
+      "title" : "Moving Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":4,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468229/Flowentech/office_sffpu3.png",
+      "title" : "Office Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":5,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468235/Flowentech/property_hfzvoy.png",
+      "title" : "Property Cleaning",
+      "subtitle":""
+    },
+    {
+      "id":6,
+      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468240/Flowentech/deep_iu0xpo.png",
+      "title" : "Deep Cleaning",
+      "subtitle":""
+    }
+  ], 
+
+  "serviceStepper": "Service",
+  "dateandtime":"DATE & TIME",
+  "address": "ADDRESS",
+  "payment": "PAYMENT",
+  "overview":"OverView",
+  "cleaning": "Cleaning",
+  "home_cleaning":"HOME CLEANING",
+  "cleaning_duration":"Cleaning Duration",
+
+  "service":{
+    "tellus":"Tell us about your cleaning needs",
+    "apartment": "Apartment Size",
+    "enter_apartment":"Enter Your Apartment Size",
+    "recommendation":"hourse (recommendation)",
+    "hourse":"hourse",
+    "cleaningDuration":"Cleaning Duration" ,
+    "HowOften": "How often should we clean ?", 
+    "with_glansandehem":"With Glansandehem you will get a regular cleaner !",
+    "mostpopular":"Most Popular", 
+    "ecofriendly_supplies":"Eco-friendly cleaning supplies", 
+    "eco_info":"eco-friendly and allergy-friendly cleaning supplies are included in your order! Do you have a vacuum cleaner, bucket & mop? We use them.",
+    "home_clean": "Home Cleaning",
+    "before_rut": "Before RUT Deduction", 
+    "without":"without RUT deduction",
+    "cleaning":"Cleaning",
+    "where": "Where will We come to Clean ?"
+  },
+  "datetime":{
+    "pets":"Pets Live Here", 
+    "what_kind":"What kind? Let's pick you a cleaner without allergies", 
+    "dateandtime":"Date and Time"
+  },
+  "address_":{
+    "our_dedicated":"Our dedicated customer care team is always here to help and will make sure that you are 100% happy!",
+    "fullname":"Full Name",
+    "enter_fullname":"Enter your Full Name", 
+    "email": "Email", 
+    "enter_email": "Enter your Email", 
+    "identity": " Personal Identity Number", 
+    "enter_identity": "Enter your Personal Identity Number", 
+    "phone": "Phone Number", 
+    "enter_phone": "Enter your Phone Number", 
+    "how_rut": "How RUT deduction works", 
+    "rut_deduction": "Swedish taxpayers are entitled to a 50% discount on the domestic work. Provide your personal identity number — and enjoy RUT deduction right away!", 
+    "gift_coupon": "Gift Card or Coupon", 
+    "apply": "Apply Coupon", 
+    "accept": "I accept terms and privacy policy"
+  }, 
+  "back": "Back", 
+  "next": "Next", 
+  "submit": "Submit"
+}
