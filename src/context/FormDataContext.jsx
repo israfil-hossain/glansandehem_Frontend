@@ -18,7 +18,7 @@ export const FormDataProvider = ({ children }) => {
     address: "",
     cleaningDurationInHours: cleanDuration,
     cleaningPrice: "",
-    cleaningCoupon:"",
+    cleaningCoupon:null,
     startDate: "",
     hasCats: null,
     hasDogs: null,

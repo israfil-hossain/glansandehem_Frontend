@@ -30,10 +30,10 @@ const Navbar = () => {
         <div className="flex flex-row gap-x-4 space-x-5">
           {/* <Link href={`/${lang}`}> */}
           <div className="flex space-x-2 justify-center items-center">
-            <img src={shortlogo} alt="shorlogo" className="w-8 h-8" />
-            <p className="lg:text-2xl  font-bold  text-secondprimary ">
+            <img src={logo} alt="shorlogo" className="w-36 h-12" />
+            {/* <p className="lg:text-2xl  font-bold  text-secondprimary ">
               Glansan<span className="text-tertiary">dehem</span>
-            </p>
+            </p> */}
           </div>
 
           {/* <img src={logo} alt="logo" className="w-40 h-13" /> */}
