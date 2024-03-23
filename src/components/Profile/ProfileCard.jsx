@@ -29,7 +29,7 @@ const ProfileCard = () => {
       const response = await adminAPI.get(paymentEndpoint);
       let link = response?.data?.data?.redirectUrl;
       if (link) {
-        window.location.href = link; 
+        window.location.href = link;
         // navigate(link); // Use useNavigate for safe redirection
       } else {
         console.warn('API response did not include a "link" property');
@@ -61,9 +61,9 @@ const ProfileCard = () => {
                   ? "bg-red-300"
                   : userSubscriptionData?.data?.currentBooking
                       ?.bookingStatus === "BookingConfirmed"
-                  ? "bg-[#a5f9a9a2]" // Use the intended background color for confirmed bookings
+                  ? "bg-[#0b7911a2]" // Use the intended background color for confirmed bookings
                   : "bg-yellow-500"
-              } text-white  px-3 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
+              } text-white  px-4 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
             >
               {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
               "BookingCancelled"
@@ -78,9 +78,9 @@ const ProfileCard = () => {
               className={` ${
                 userSubscriptionData?.data?.currentBooking?.paymentStatus ===
                 "PaymentCompleted"
-                  ? "bg-[#a5f9a9a2] "
+                  ? "bg-[#0b7911a2] "
                   : "bg-red-300" // Use the intended background color for confirmed bookings
-              } text-white  px-3 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px] `}
+              } text-white  px-4 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px] `}
             >
               {userSubscriptionData?.data?.currentBooking?.paymentStatus ===
               "PaymentCompleted"
@@ -237,14 +237,17 @@ const ProfileCard = () => {
                   <span className="text-2xl font-bold text-blue-800">
                     {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
                   </span>
-                  <button
-                    className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
-                      hover:to-primary text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg"
-                    onClick={handlePayment}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Processing..." : "Pay Now"}
-                  </button>
+                  {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                    "BookingConfirmed" && (
+                    <button
+                      className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                    hover:to-primary text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg"
+                      onClick={handlePayment}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Processing..." : "Pay Now"}
+                    </button>
+                  )}
                 </div>
               </div>
             )}

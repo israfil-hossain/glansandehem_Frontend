@@ -48,8 +48,6 @@ const Home = () => {
     }));
   }, [suppliesCharge?.data]);
 
-
-
   const nextStep = () => {
     setStep(step + 1);
   };
@@ -67,17 +65,19 @@ const Home = () => {
   } = useCreate({
     endpoint: API.ADDCleaningSubscription,
     onSuccess: () => {
-      
       setFormData("");
       toast.success("Cleaning Service Booking Confirmed ! 👋");
-      navigate("/")
+      navigate("/login");
     },
-    onError: (error) => console.error("Error creating data:", error),
+    onError: (error) => {
+      console.error("Error creating data:", error);
+      toast.error("Something is wrong ", error?.response?.data?.message);
+    },
   });
 
   const handleSubmit = async () => {
     if (serviceIsLoading) {
-      return <Progress />
+      return <Progress />;
     }
 
     try {
@@ -99,11 +99,6 @@ const Home = () => {
       };
 
       await spaceCreate(payload); // Trigger the mutation with form data
-
-      if (isSuccess) {
-        setFormData("");
-        toast.success("Cleaning Service Created Successfully ! 👋");
-      }
     } catch (error) {
       // Handle errors, e.g., display error messages
       console.log({ error });
