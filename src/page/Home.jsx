@@ -125,7 +125,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container mb-10 flex overflow-hidden lg:h-[80vh]  flex-col-reverse lg:flex-row lg:space-x-5">
+    <div className="container mb-10 flex overflow-hidden lg:h-[80vh]  flex-col lg:flex-row lg:space-x-5">
       <div className=" mx-0 mb-10  w-[100%] rounded-xl lg:mx-auto overflow-y-auto  lg:w-[55%] ">
         <div className="container mt-5">
           <Stepper currentStep={step} steps={steps} />

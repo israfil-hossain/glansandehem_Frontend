@@ -60,7 +60,10 @@ const ProfileCard = () => {
                 "BookingCancelled"
                   ? "bg-red-300"
                   : userSubscriptionData?.data?.currentBooking
-                      ?.bookingStatus === "BookingConfirmed"
+                      ?.bookingStatus === "BookingServed"
+                  ? "bg-blue-500"
+                  : userSubscriptionData?.data?.currentBooking
+                      ?.bookingStatus === "BookingCompleted"
                   ? "bg-[#0b7911a2]" // Use the intended background color for confirmed bookings
                   : "bg-yellow-500"
               } text-white  px-4 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
@@ -69,8 +72,11 @@ const ProfileCard = () => {
               "BookingCancelled"
                 ? "Booking Cancelled"
                 : userSubscriptionData?.data?.currentBooking?.bookingStatus ===
-                  "BookingConfirmed"
-                ? "Booking Confirmed" // Use the intended background color for confirmed bookings
+                  "BookingServed"
+                ? "Booking Confirmed"
+                : userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                  "BookingCompleted"
+                ? "Booking Completed" // Use the intended background color for confirmed bookings
                 : "Booking Processing..."}
             </div>
 
@@ -238,7 +244,7 @@ const ProfileCard = () => {
                     {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
                   </span>
                   {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
-                    "BookingConfirmed" && (
+                    "BookingServed" && (
                     <button
                       className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
                     hover:to-primary text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg"

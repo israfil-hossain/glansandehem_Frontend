@@ -36,9 +36,9 @@ const App = () => {
         },
         {
           path: "/reset-password/:id",
-          exact: true,
           element: <ResetPassword />,
         },
+        
 
         //auth
         {
@@ -48,6 +48,10 @@ const App = () => {
             {
               path: "",
               element: <Home />,
+            },
+            {
+              path: "/reset-password/:id",
+              element: <ResetPassword />,
             },
             {
               path: "login",
