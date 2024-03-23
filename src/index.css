@@ -105,3 +105,11 @@ html {
     opacity: 1;
   
 }
+
+.email-container {
+    width: 220px; /* Set width of the container */
+  }
+
+  .email {
+    word-break: break-all; /* Break the email into multiple lines */
+  }

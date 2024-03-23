@@ -4,31 +4,38 @@ import { BiLockAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Progress } from "../components/common/Progress";
-import AuthService from "../service/AuthService";
+
 import forgotPasswordValidationSchema from "../utils/validation/forgotPasswordValidation";
+import { useCreate } from "../hooks";
+import { API } from "../api/endpoints";
 
 const ForgotPassword = () => {
   const initialValues = {
     email: "",
   };
   let navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutateAsync: resetMutate, isLoading } = useCreate({
+    endpoint: API.ResetPasswordRequest, // Replace with your actual API endpoint
+    onSuccess: (data) => {
+      toast.success("Successfully Reset Password Link Send by Your Email !");
+      navigate("/login");
+    },
+    onError: (error) => {
+      // Handle update error, e.g., display an error message
+      console.error("Update failed", error);
+      toast.error("Something went wrong !");
+    },
+  });
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    setIsLoading(true);
-    AuthService.forgotPassword(values)
-      .then((response) => {
-        console.log("Response", response);
-
-        toast.success("Successfully Reset Password Link Send by Your Email !");
-        setIsLoading(false);
-        navigate("/login");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        toast.error("Something went Wrong!");
-        console.log("Err => ", err);
-      });
+    try {
+      await resetMutate(values);
+      setSubmitting(false);
+    } catch (e) {
+      setSubmitting(true);
+      console.log("Error during Create ", e);
+    }
   };
   return (
     <Fragment>
@@ -86,7 +93,8 @@ const ForgotPassword = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                      className=" bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                      hover:to-primary group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         {isLoading ? (

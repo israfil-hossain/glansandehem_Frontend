@@ -8,11 +8,15 @@ import AppOutlet from "./outlets/AppOutlet";
 import AuthorizedOutlet from "./outlets/AuthorizedOutlet";
 import UnauthorizedOutlet from "./outlets/UnauthorizedOutlet";
 
-const Service = lazy(() => import("./page/Service"));
+
 const Home = lazy(() => import("./page/Home"));
 const Profile = lazy(() => import("./page/Profile"));
+const ProfileSetting = lazy(() => import("./page/ProfileSetting"));
 const Signin = lazy(() => import("./page/Signin"));
 const Signup = lazy(() => import("./page/Signup"));
+const ForgotPassword = lazy(() => import("./page/ForgotPassword"));
+const ResetPassword = lazy(() => import("./page/ResetPassword"));
+
 
 const App = () => {
   const router = createBrowserRouter([
@@ -24,6 +28,16 @@ const App = () => {
           path: "/",
           exact: true,
           element: <Home />,
+        },
+        {
+          path: "/forgotpassword",
+          exact: true,
+          element: <ForgotPassword />,
+        },
+        {
+          path: "/reset-password/:id",
+          exact: true,
+          element: <ResetPassword />,
         },
 
         //auth
@@ -43,10 +57,7 @@ const App = () => {
               path: "signup",
               element: <Signup />,
             },
-            {
-              path: "service",
-              element: <Service />,
-            },
+           
 
             {
               path: "*",
@@ -64,14 +75,13 @@ const App = () => {
               path: "",
               element: <Home />,
             },
-
-            {
-              path: "service",
-              element: <Service />,
-            },
             {
               path: "profile",
               element: <Profile />,
+            },
+            {
+              path: "profile-setting",
+              element: <ProfileSetting />,
             },
             {
               path: "*",

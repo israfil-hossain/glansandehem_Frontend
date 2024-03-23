@@ -64,8 +64,8 @@ const Signin = () => {
       <div className="  flex-row hidden lg:flex">
         <div
           className="
-        bg-gradient-to-r from-primary via-secondary-500 to-indigo-600 hover:from-indigo-600
-        hover:via-secondary-400 hover:to-primary 
+        bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+         hover:to-primary
         
         py-8 lg:min-h-[350px]  lg:w-[400px] px-4  sm:rounded-l-lg sm:px-10 shadow-md hover:shadow-lg"
         >
@@ -167,18 +167,19 @@ const Signin = () => {
                         component="p"
                         className="mt-2 text-sm text-red-600"
                       />
-                      {/* <Link to="/forgotpassword">
+                      <Link to="/forgotpassword">
                         <p className="pt-3 text-blue-400 hover:text-blue-700">
                           forgot password ?
                         </p>
-                      </Link> */}
+                      </Link>
                     </div>
                   </div>
                   <div className="mt-4">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="group text-white relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                      className=" bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                      hover:to-primary group text-white relative w-full flex justify-center py-2 px-4 border  text-sm font-medium rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         {isSigninLoading ? (
@@ -303,7 +304,7 @@ const Signin = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group text-white relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                    className="bg-gradient-to-r from-primary via-secondprimary to-indigo-600  text-white relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                   >
                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                       {isSigninLoading ? (

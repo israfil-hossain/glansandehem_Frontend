@@ -1,19 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardTitle, CardHeader, CardContent, Card } from "../ui/card.tsx";
 import { CheckIcon, PawPrintIcon } from "../common/Icons/Icons";
 import { useQuery } from "@tanstack/react-query";
 import { API } from "@/api/endpoints.js";
 import { formatDatewithTime } from "@/utils/CommonFunction.js";
 import { FaChartArea, FaQrcode } from "react-icons/fa";
+import GridCard from "../common/ui/GridCard.jsx";
+import { CommonProgress } from "../common/CommonProgress.jsx";
+import { useNavigate } from "react-router-dom";
+import adminAPI from "@/api/adminAPI.js";
 
 const ProfileCard = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   // GetCleaningUserSubscription
   const {
     data: userSubscriptionData = {},
     isLoading: userSubscriptionLoading,
   } = useQuery([API.GetCleaningUserSubscription]);
 
-  console.log({ userSubscriptionData });
+  const paymentEndpoint =
+    API.PaymentReceive + `${userSubscriptionData?.data?.currentBooking?._id}`;
+
+  const handlePayment = async () => {
+    try {
+      setIsLoading(true);
+      const response = await adminAPI.get(paymentEndpoint);
+      let link = response?.data?.data?.redirectUrl;
+      if (link) {
+        window.location.href = link; 
+        // navigate(link); // Use useNavigate for safe redirection
+      } else {
+        console.warn('API response did not include a "link" property');
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.error("Error fetching link:", err);
+      // Handle errors gracefully (e.g., display an error message to the user)
+      setIsLoading(false);
+    }
+  };
+
+  if (userSubscriptionLoading) {
+    return <CommonProgress />;
+  }
 
   return (
     <Card className="lg:mx-5 mx-0 w-full rounded-lg bg-white shadow-md">
@@ -23,11 +54,38 @@ const ProfileCard = () => {
             Service Details
           </div>
           <div className="flex justify-between lg:mt-0 mt-5  ">
-            <div className="bg-orange-500 text-white  px-3 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px]">
-              Complete Booked
+            <div
+              className={`${
+                userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                "BookingCancelled"
+                  ? "bg-red-300"
+                  : userSubscriptionData?.data?.currentBooking
+                      ?.bookingStatus === "BookingConfirmed"
+                  ? "bg-[#a5f9a9a2]" // Use the intended background color for confirmed bookings
+                  : "bg-yellow-500"
+              } text-white  px-3 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
+            >
+              {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+              "BookingCancelled"
+                ? "Booking Cancelled"
+                : userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                  "BookingConfirmed"
+                ? "Booking Confirmed" // Use the intended background color for confirmed bookings
+                : "Booking Processing..."}
             </div>
-            <div className="bg-green-500 text-white  px-3 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px]">
-              Payment Completed
+
+            <div
+              className={` ${
+                userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+                "PaymentCompleted"
+                  ? "bg-[#a5f9a9a2] "
+                  : "bg-red-300" // Use the intended background color for confirmed bookings
+              } text-white  px-3 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px] `}
+            >
+              {userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+              "PaymentCompleted"
+                ? "Payment Paid"
+                : "Pending Payment"}
             </div>
           </div>
         </div>
@@ -41,8 +99,8 @@ const ProfileCard = () => {
             <p className="flex justify-center items-center rounded-xl py-1 bg-indigo-500 px-4 lg:text-sm text-[12px] text-white text-center ">
               Service Taken{" "}
             </p>
-            <h2 className="mb-3 lg:text-lg text-[14px] font-bold text-blue-900">
-              {userSubscriptionData?.data?.cleaningPrice?.subscriptionFrequency}
+            <h2 className=" lg:text-lg text-[14px] font-bold text-blue-900">
+              {userSubscriptionData?.data?.subscriptionFrequency}
             </h2>
           </div>
           <div className="flex justify-start space-x-10 my-2 w-full items-center">
@@ -142,24 +200,54 @@ const ProfileCard = () => {
                 kr
               </span>
             </div>
+
+            <div className="flex justify-between py-2">
+              <span className="text-gray-700 text-sm font-medium">
+                Additional Fees Description
+              </span>
+              <span className="text-grey-900 text-sm font-medium">
+                {userSubscriptionData?.data?.currentBooking?.remarks}{" "}
+              </span>
+            </div>
+
             <div className="flex justify-between pt-2">
               <span className="text-gray-800 text-lg font-bold">TOTAL</span>
               <span className="text-2xl font-bold text-blue-800">
                 {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
               </span>
             </div>
-            <div className="flex justify-between pt-2">
-              <span className="text-gray-800 text-lg font-bold text-red-500">
-                DUE PAYMENT
-              </span>
 
-              <div className="flex space-x-5 space-y-4 justify-center items-center lg:flex flex-col">
-                <span className="text-2xl font-bold text-blue-800">500 kr</span>
-                <button className="bg-blue-800 hover:bg-blue-700 text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg">
-                  pay
-                </button>
+            {userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+            "PaymentCompleted" ? (
+              <div className="flex justify-between pt-2">
+                <span className="text-gray-800 text-lg font-bold">
+                  TOTAL PAID
+                </span>
+                <span className="text-2xl font-bold text-blue-800">
+                  {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
+                </span>
               </div>
-            </div>
+            ) : (
+              <div className="flex justify-between pt-2">
+                <span className="text-gray-800 text-lg font-bold text-red-500">
+                  DUE PAYMENT
+                </span>
+
+                <div className="flex space-x-5 space-y-4 justify-center items-center lg:flex flex-col">
+                  <span className="text-2xl font-bold text-blue-800">
+                    {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
+                  </span>
+                  <button
+                    className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                      hover:to-primary text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg"
+                    onClick={handlePayment}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Processing..." : "Pay Now"}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

@@ -5,38 +5,48 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Progress } from "../components/common/Progress";
-import AuthService from "../service/AuthService";
 import resetPasswordValidationSchema from "../utils/validation/resetPasswordValidation";
+import { useCreate } from "../hooks";
+import { API } from "../api/endpoints";
 
 const ResetPassword = () => {
   const initialValues = {
     confirmPassword: "",
     newPassword: "",
+    resetToken: "",
   };
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-  const { token } = useParams();
+  const { id } = useParams();
 
+  // Create Mutation ....
+  const { mutateAsync: resetMutate, isLoading } = useCreate({
+    endpoint: API.ResetPassword, // Replace with your actual API endpoint
+    onSuccess: (data) => {
+      toast.success("Successfully Reset Password !");
+      navigate("/login");
+    },
+    onError: (error) => {
+      // Handle update error, e.g., display an error message
+      console.error("Update failed", error);
+      toast.error("Something went wrong !");
+    },
+  });
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    setIsLoading(true);
-    AuthService.resetPassword(token, values)
-      .then((response) => {
-        console.log("Response", response);
-
-        toast.success("Successfully Reset Password !");
-        setIsLoading(false);
-        navigate("/login");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        toast.error("Something went Wrong!");
-        console.log("Err => ", err);
-      });
+    try {
+      const payload = {
+        newPassword: values?.newPassword,
+        resetToken: id,
+      };
+      await resetMutate(payload);
+      setSubmitting(false);
+    } catch (e) {}
   };
+
   return (
     <Fragment>
       <div className=" flex justify-center items-start w-full lg:pt-16 pt-5">
@@ -142,7 +152,8 @@ const ResetPassword = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                      className=" bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                      hover:to-primary group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         {isLoading ? (

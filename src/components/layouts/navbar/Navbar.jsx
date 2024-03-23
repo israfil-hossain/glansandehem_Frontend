@@ -38,7 +38,9 @@ const Navbar = () => {
 
           {/* <img src={logo} alt="logo" className="w-40 h-13" /> */}
           {/* </Link> */}
-          {userFound ? <></> : (
+          {userFound ? (
+            <></>
+          ) : (
             <ul className="hidden items-center justify-center gap-x-8 lg:flex">
               <li>
                 <Link to={"/"}>{t("navigation.home")}</Link>
@@ -52,7 +54,8 @@ const Navbar = () => {
             <div className="">
               {userFound ? (
                 <button
-                  className="flex items-center lg:flex hidden gap-2 justify-between rounded-xl bg-tertiary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
+                  className="items-center lg:flex hidden gap-2 justify-between rounded-xl  bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                  hover:to-primary  px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
                   onClick={handleUserLogout}
                 >
                   <FiLogOut className=" text-white min-w-max" />
@@ -65,7 +68,10 @@ const Navbar = () => {
 
                 <div className="hidden lg:flex ">
                   <Link to={`/login`}>
-                    <button className="rounded-xl bg-tertiary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700">
+                    <button
+                      className="rounded-xl  bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                     hover:to-primary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
+                    >
                       Login
                     </button>
                   </Link>
