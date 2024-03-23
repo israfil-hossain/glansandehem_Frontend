@@ -13,7 +13,7 @@ const Profile = () => {
   console.log({ userData });
   return (
     <div className="container h-full overflow-y-hidden">
-      <h2 className="text-3xl font-semibold text-secondprimary">
+      <h2 className="lg:text-3xl font-semibold text-secondprimary">
         👋Hi, {userData?.fullName}
       </h2>
       <div className="flex w-full justify-center pt-5">

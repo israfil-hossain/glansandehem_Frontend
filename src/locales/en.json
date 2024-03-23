@@ -107,6 +107,7 @@
   "cleaning": "Cleaning",
   "home_cleaning":"HOME CLEANING",
   "cleaning_duration":"Cleaning Duration",
+  "frequency": "Cleaning Frequency",
 
   "service":{
     "tellus":"Tell us about your cleaning needs",

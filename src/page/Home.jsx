@@ -24,7 +24,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-
 const Home = () => {
   const { t } = useTranslation();
   let navigate = useNavigate();
@@ -79,22 +78,22 @@ const Home = () => {
     try {
       console.log({ formData });
       const payload = {
-        userFullName: formData?.userFullName, 
-        userEmail: formData?.userEmail, 
-        userPidNumber: formData?.userPidNumber, 
-        userPhoneNumber: formData?.userPhoneNumber, 
-        areaInSquareMeters: formData?.areaInSquareMeters, 
-        postalCode: formData?.postalCode, 
-        address: formData?.address, 
-        cleaningDurationInHours: formData?.cleaningDurationInHours, 
-        cleaningPrice: formData?.cleaningPrice, 
-        cleaningCoupon: formData?.cleaningCoupon, 
-        startDate: formData?.startDate, 
-        hasCats: formData?.hasCats, 
-        hasDogs: formData?.hasDogs, 
-        hasOtherPets: formData?.hasOtherPets, 
-      }
-      
+        userFullName: formData?.userFullName,
+        userEmail: formData?.userEmail,
+        userPidNumber: formData?.userPidNumber,
+        userPhoneNumber: formData?.userPhoneNumber,
+        areaInSquareMeters: formData?.areaInSquareMeters,
+        postalCode: formData?.postalCode,
+        address: formData?.address,
+        cleaningDurationInHours: formData?.cleaningDurationInHours,
+        cleaningPrice: formData?.cleaningPrice,
+        cleaningCoupon: formData?.cleaningCoupon,
+        startDate: formData?.startDate,
+        hasCats: formData?.hasCats,
+        hasDogs: formData?.hasDogs,
+        hasOtherPets: formData?.hasOtherPets,
+      };
+
       await spaceCreate(payload); // Trigger the mutation with form data
 
       if (isSuccess) {
@@ -154,20 +153,23 @@ const Home = () => {
               </div>
             </div>
             <hr />
-            <div className="border-gray-200 flex justify-between  py-4">
-              <div className="flex items-center space-x-1">
+            <div className="border-gray-200 lg:flex flex-col  justify-between  py-4">
+              <div className="flex items-center space-x-3">
                 <CheckIcon className="h-5 w-5 text-green-500" />
+                <p>{t("frequency")}: </p>
                 <span className="text-gray-700 text-sm font-medium uppercase">
-                  {formData?.cleaningFrequency}
+                  {formData?.cleaningFrequency || "N/A"}
                 </span>
               </div>
-              <div className="flex space-x-2 items-center">
-                <CheckIcon className="h-5 w-5 text-green-500" />
-                {t("cleaning_duration")} :{" "}
+              <div className="flex space-x-3 items-center">
+                <div className="flex space-x-3 gap-3 items-center ">
+                  <CheckIcon className="h-5 w-5 text-green-500" />
+                  {t("cleaning_duration")} :{" "}
+                </div>
+                <span className="text-gray-700 text-sm font-medium">
+                  {formData?.cleaningDurationInHours} h
+                </span>
               </div>
-              <span className="text-gray-700 text-sm font-medium">
-                {formData?.cleaningDurationInHours} h
-              </span>
             </div>
             <div className="flex justify-between py-4">
               <div className="flex items-center space-x-1">

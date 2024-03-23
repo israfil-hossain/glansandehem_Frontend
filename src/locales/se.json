@@ -105,6 +105,8 @@
   "cleaning": "Rengöring",
   "home_cleaning":"HEMSTÄDNING",
   "cleaning_duration":"Rengöringstid",
+  "frequency": "Rengöringsfrekvens",
+
 
   "service":{
     "tellus":"Berätta för oss om dina städbehov",

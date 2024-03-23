@@ -15,7 +15,7 @@ const AuthorizedOutlet = () => {
     <Fragment>
       {/* <Navbar toggleMenu={toggleMenu} /> */}
       <main className="flex-grow  ">
-        <div className="mx-auto  px-5 py-5">
+        <div className="mx-auto  py-5">
           <Suspense fallback={<CommonProgress />}>
             <Outlet />
           </Suspense>

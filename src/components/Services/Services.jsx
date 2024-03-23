@@ -32,7 +32,7 @@ const Services = ({ onSubmit }) => {
   };
 
   return (
-    <div className="lg:w-md w-full rounded-lg  bg-white p-5 px-4  shadow-lg lg:mx-auto lg:px-10">
+    <div className="lg:w-md w-full rounded-lg  bg-white py-4 shadow-lg lg:mx-auto lg:px-10">
       <h2 className={`text-center text-[35px] font-[700] text-secondprimary`}>
         {t("service.tellus")}
       </h2>
@@ -171,7 +171,7 @@ const Services = ({ onSubmit }) => {
                   {cleaningFrequency?.data?.map((item, i) => (
                     <div
                       key={i}
-                      className={`bg-gray-100 h-24 items-center  cursor-pointer   rounded-lg  overflow-hidden ${
+                      className={`bg-gray-100  items-center  cursor-pointer   rounded-lg  overflow-hidden ${
                         values?.cleaningFrequency ===
                         item?.subscriptionFrequency
                           ? "border-2 border-black"

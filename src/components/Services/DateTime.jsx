@@ -59,8 +59,8 @@ const handleSubmit = () =>{
 
   return (
     <>
-      <div className="w-full rounded-xl bg-white p-6 shadow-lg">
-        <h2 className="mb-6 text-center text-[40px] font-semibold">
+      <div className="w-full rounded-xl bg-white py-5 shadow-lg">
+        <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
           
           {t("service.where")}
         </h2>
@@ -167,7 +167,7 @@ function PetChecked(props) {
   }, [pets]);
 
   return (
-    <div className="mb-4 bg-slate-100 w-80 py-5 px-2">
+    <div className="mb-4 bg-slate-100 lg:w-80 w-full px-2 py-5 ">
       <div className="mb-2 flex items-center">
         <Collapsible
           open={isOpen}

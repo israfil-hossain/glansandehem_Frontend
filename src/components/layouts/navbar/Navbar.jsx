@@ -53,14 +53,23 @@ const Navbar = () => {
           <div className="flex flex-row items-center">
             <div className="">
               {userFound ? (
-                <button
-                  className="items-center lg:flex hidden gap-2 justify-between rounded-xl  bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
+                <div className="flex space-x-4 justify-center items-center ">
+                  {" "}
+                  <Link to="/profile">
+                    <div className="lg:flex hidden lg:px-4 px-1 lg:py-1 cursor-pointer items-center justify-center rounded-full bg-slate-200 lg:mb-0 mb-5">
+                      <FaUser className="rounded-full bg-slate-200 p-1 w-7 h-7" />
+                      Profile
+                    </div>
+                  </Link>
+                  <button
+                    className="items-center lg:flex hidden gap-2 justify-between rounded-xl  bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
                   hover:to-primary  px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
-                  onClick={handleUserLogout}
-                >
-                  <FiLogOut className=" text-white min-w-max" />
-                  Logout
-                </button>
+                    onClick={handleUserLogout}
+                  >
+                    <FiLogOut className=" text-white min-w-max" />
+                    Logout
+                  </button>
+                </div>
               ) : (
                 /* <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-200 ">
                     <FaUser className="rounded-full bg-slate-200 p-1 w-7 h-7" />

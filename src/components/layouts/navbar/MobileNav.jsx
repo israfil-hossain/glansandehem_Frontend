@@ -6,12 +6,15 @@ import { Link } from "react-router-dom";
 import { useAuthUserContext } from "@/context/AuthUserProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { FiLogOut } from "react-icons/fi";
-
+import { removeTokens } from "@/utils/localStorageUtils";
+import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 const MobileNav = () => {
   const { t, i18n } = useTranslation();
   const [toggle, setToggle] = useState(false);
   const { userFound } = useAuthUserContext();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const handleUserLogout = () => {
     removeTokens();
@@ -56,29 +59,38 @@ const MobileNav = () => {
         </ul> */}
         <div className="">
           {userFound ? (
-            <button
-              className="flex items-center gap-2 justify-between rounded-xl bg-tertiary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
-              onClick={handleUserLogout}
-            >
-              <FiLogOut className=" text-white min-w-max" />
-              Logout
-            </button>
+            <>
+              <Link to="/profile">
+                <div className="flex  cursor-pointer items-center justify-center rounded-full bg-slate-200 mb-5">
+                  <FaUser className="rounded-full bg-slate-200 p-1 w-7 h-7" />
+                  Profile
+                </div>
+              </Link>
+
+              <button
+                className="flex items-center gap-2 justify-between rounded-xl bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
+                onClick={handleUserLogout}
+              >
+                <FiLogOut className=" text-white min-w-max" />
+                Logout
+              </button>
+            </>
           ) : (
             /* <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-200 ">
                     <FaUser className="rounded-full bg-slate-200 p-1 w-7 h-7" />
-                  </div> */
+                  </div> bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary  */
 
-            <div className="hidden lg:flex ">
-              <Link to={`/login`}>
-                <button className="rounded-xl bg-tertiary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700">
-                  Login
-                </button>
-              </Link>
-            </div>
+            <Link to="/login">
+              <button
+                className="flex items-center gap-2 justify-between rounded-xl bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary px-6 py-1 text-white shadow-lg hover:cursor-pointer  hover:bg-indigo-700"
+                onClick={handleUserLogout}
+              >
+                <FiLogOut className=" text-white min-w-max" />
+                Login
+              </button>
+            </Link>
           )}
         </div>
-
-       
       </div>
     </div>
   );
