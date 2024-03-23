@@ -19,16 +19,18 @@ export const CommonProgress = () => {
         sx={{
           opacity: 1,
           marginTop:"100px",
-          
           alignItems: "center",
         
         }}
       >
+        <div className=" rounded-xl ">
         <img
           src={loader}
           alt="loader"
-          className="lg:w-[200px] xs:w-[150px] lg:h-[200px] xs:h-[150px] justify-center"
+          className=" p-4"
         />
+        </div>
+        
       </Box>
     </Box>
   );

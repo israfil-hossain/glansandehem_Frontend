@@ -13,7 +13,7 @@ const useDeleteHook = (apiEndpoint, onSuccessCallback, onErrorCallback) => {
         onSuccessCallback(response.data.message);
       },
       onError: (errors) => {
-        console.log("errors", errors);
+     
         notifyError(errors.response?.data?.message);
         onErrorCallback(errors.response.data.message);
       },

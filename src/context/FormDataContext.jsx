@@ -6,7 +6,6 @@ const FormDataContext = createContext();
 export const FormDataProvider = ({ children }) => {
 
   let storedFormData = localStorage.getItem("formData");
-  console.log({storedFormData})
   const parsedFormData = storedFormData ? JSON.parse(storedFormData) : null;
   const cleanDuration = Duration(parsedFormData?.size);
  
@@ -30,7 +29,7 @@ export const FormDataProvider = ({ children }) => {
     percentDiscount:"",
   });
 
-  console.log({formData})
+
 
   return (
     <FormDataContext.Provider value={{ formData, setFormData }}>

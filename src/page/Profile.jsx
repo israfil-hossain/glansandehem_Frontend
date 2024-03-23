@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const { userData } = useAuthUserContext();
 
-  console.log({ userData });
+ 
   return (
     <div className="container h-full overflow-y-hidden">
       <h2 className="lg:text-3xl font-semibold text-secondprimary">

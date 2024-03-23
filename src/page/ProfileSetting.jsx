@@ -28,7 +28,7 @@ import GridCard from "@/components/common/ui/GridCard";
 
 const ProfileSetting = () => {
   const { userData, userRefetch } = useAuthUserContext();
-  console.log("userData", userData);
+ 
 
   const [open, setOpen] = useState(false);
 
@@ -46,7 +46,7 @@ const ProfileSetting = () => {
     },
     onError: (error) => {
       // Handle update error, e.g., display an error message
-      console.error("Update failed", error);
+  
       toast.error("Something went wrong !");
     },
   });
@@ -338,7 +338,7 @@ const ProfileSection = ({ handleOpen, userData, refetch }) => {
     },
     onError: (error) => {
       // Handle update error, e.g., display an error message
-      console.error("Update failed", error);
+  
       toast.error("Something went wrong !");
     },
   });

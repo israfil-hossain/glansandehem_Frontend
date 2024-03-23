@@ -11,16 +11,14 @@ import { useCreate } from "@/hooks";
 import { API } from "@/api/endpoints";
 import { Progress } from "../common/Progress";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Address({ prevStep, onSubmit, isLoading }) {
   const { t } = useTranslation();
   const { formData, setFormData } = useFormData();
   const [isSubmit, setIsSubmit] = useState(false);
   const [coupon, setCoupon] = useState("");
-  //   const [coupondata,setCouponData] = useState("");
 
-  console.log({ coupon });
-  console.log({ formData });
 
   const { mutateAsync: verifyCoupon, isLoading: couponLoading } = useCreate({
     endpoint: API.VerifyCoupon, // Replace with your actual API endpoint
@@ -37,9 +35,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
         cleaningPrice - discountPrice + formData?.showSupplies
       );
 
-      console.log({ cleaningPrice });
-      console.log({ discountPrice });
-      //   console.log({couponDiscountAmount})
+    
 
       await setFormData((prev) => ({
         ...prev,
@@ -50,7 +46,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
     },
     onError: (error) => {
       // Handle update error, e.g., display an error message
-      console.error("Update failed", error);
+     
       toast.error("Something went wrong !");
     },
   });
@@ -273,7 +269,22 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
             <div className="flex items-center space-x-2 mt-4">
               <Checkbox id="terms" />
               <label className="text-sm font-medium" htmlFor="terms">
-                {t("address_.accept")}
+                {/* {t("address_.accept")} */}I accept{" "}
+                <Link
+                  to="https://glansandehem.se/terms-conditions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="font-semibold text-sm">Terms</span>
+                </Link>{" "}
+                and{" "}
+                <Link
+                  to="https://glansandehem.se/privacy_policy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="font-semibold text-sm">Policy</span>
+                </Link>
               </label>
             </div>
 

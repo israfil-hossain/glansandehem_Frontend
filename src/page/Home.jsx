@@ -23,6 +23,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Progress } from "@/components/common/Progress";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -47,7 +48,7 @@ const Home = () => {
     }));
   }, [suppliesCharge?.data]);
 
-  // console.log(suppliesCharge?.data);
+
 
   const nextStep = () => {
     setStep(step + 1);
@@ -63,20 +64,23 @@ const Home = () => {
     isSuccess,
     isError,
     error,
-    data,
   } = useCreate({
     endpoint: API.ADDCleaningSubscription,
-    onSuccess: () => navigate("/"),
+    onSuccess: () => {
+      
+      setFormData("");
+      toast.success("Cleaning Service Booking Confirmed ! 👋");
+      navigate("/")
+    },
     onError: (error) => console.error("Error creating data:", error),
   });
 
   const handleSubmit = async () => {
     if (serviceIsLoading) {
-      return console.log("Data creation in progress...");
+      return <Progress />
     }
 
     try {
-      console.log({ formData });
       const payload = {
         userFullName: formData?.userFullName,
         userEmail: formData?.userEmail,
@@ -86,7 +90,7 @@ const Home = () => {
         postalCode: formData?.postalCode,
         address: formData?.address,
         cleaningDurationInHours: formData?.cleaningDurationInHours,
-        cleaningPrice: formData?.cleaningPrice,
+        subscriptionFrequency: formData?.cleaningFrequency,
         cleaningCoupon: formData?.cleaningCoupon,
         startDate: formData?.startDate,
         hasCats: formData?.hasCats,

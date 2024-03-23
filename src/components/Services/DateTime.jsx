@@ -13,9 +13,9 @@ import { t } from "i18next";
 
 export default function DateTime({ onSubmit, prevStep }) {
   const { formData, setFormData } = useFormData();
-  const [postalCode,setPostalCode] = useState(formData?.postalCode)
+  const [postalCode, setPostalCode] = useState(formData?.postalCode);
 
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [error, setError] = useState("");
   const [pets, setPets] = useState({
     cats: false,
@@ -23,48 +23,75 @@ export default function DateTime({ onSubmit, prevStep }) {
     otherPets: false,
   });
 
+
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: newValue,
-    }));
+
+    // Handle date input specifically:
+    if (name === "startDate" && type === "datetime-local") {
+      const today = new Date().toISOString().slice(0, 16); // Get today's date in ISO format
+      e.target.min = today; // Set minimum selectable date to today
+
+      // Potentially add error handling for invalid date formats (optional):
+      try {
+        new Date(newValue); // Attempt to parse the date
+        setFormData((prev) => ({
+          ...prev,
+          [name]: newValue,
+        }));
+      } catch (err) {
+        console.error(
+          'Invalid date format for "startDate". Please use YYYY-MM-DDTHH:mm format.'
+        );
+        // Optionally display an error message to the user
+      }
+    } else {
+      // Handle other input types as usual
+      setFormData((prev) => ({
+        ...prev,
+        [name]: newValue,
+      }));
+    }
   };
 
   const handlePostalChange = (e) => {
     const value = parseInt(e.target.value.replace(/\D/g, ""));
     if (isNaN(value)) {
-        setError("Invalid postal code (only numbers allowed)"); 
+      setError("Invalid postal code (only numbers allowed)");
     }
-    
+
     if (!isValid(value)) {
-        setError("Invalid postal code");
-    } 
+      setError("Invalid postal code");
+    }
 
     setError("");
-    setPostalCode(value); 
-        
-    
-};
+    setPostalCode(value);
+  };
 
-const handleSubmit = () =>{
-    setFormData((prev)=>({
-        ...prev, 
-        postalCode: postalCode, 
-    }))
-    onSubmit()
-}
+  const handleSubmit = () => {
+    if (!formData.address || !formData.startDate || !postalCode) {
+      setError(
+        "Please fill in the required fields: Address, Postal Code, or Date & Time"
+      );
+      return;
+    }
 
+    setFormData((prev) => ({
+      ...prev,
+      postalCode: postalCode,
+    }));
+    onSubmit();
+  };
 
   return (
     <>
-      <div className="w-full rounded-xl bg-white py-5 shadow-lg">
+      <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-5">
         <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
-          
           {t("service.where")}
         </h2>
-        <div className="mb-4  flex gap-4 ">
+        <div className="mb-4  flex lg:flex-row flex-col gap-4 ">
           <input
             type="text"
             className="border-gray-300 px-2 py-3 border w-full"
@@ -96,22 +123,23 @@ const handleSubmit = () =>{
             defaultValue={formData?.startDate}
             className="py-3 px-5 border"
             onChange={handleInputChange}
+            min={new Date().toISOString().slice(0, 16)} 
           />
         </div>
 
         {error && (
           <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
             <FrownIcon className="mr-2 text-red-500" />
-            <p>
-              {error}
-            </p>
+            <p>{error}</p>
           </div>
         )}
-        {(postalCode?.length < 4 && !formData?.startDate) && (
+        {postalCode?.length < 4 && !formData?.startDate && (
           <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
             <FrownIcon className="mr-2 text-red-500" />
             <p>
-              {"Please Fillup Required Filled ( Address or PostalCode or Date and Time) "}
+              {
+                "Please Fillup Required Filled ( Address or PostalCode or Date and Time) "
+              }
             </p>
           </div>
         )}
@@ -136,7 +164,6 @@ const handleSubmit = () =>{
                 ease-in-out hover:bg-primary hover:text-white
               `}
           onClick={handleSubmit}
-          disabled={postalCode?.lenght < 4 || !formData?.startDate}
         >
           {t("next")}
         </button>

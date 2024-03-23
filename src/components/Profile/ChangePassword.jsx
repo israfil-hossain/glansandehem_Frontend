@@ -33,8 +33,6 @@ const ChangePassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRetypePassword, setShowRetypePassword] = useState(false);
 
- 
-
   const updateMutation = useCreate({
     endpoint: API.ChangePassword, // Replace with your actual API endpoint
     onSuccess: (data) => {
@@ -42,11 +40,11 @@ const ChangePassword = () => {
     },
     onError: (error) => {
       // Handle update error, e.g., display an error message
-      console.error("Update failed", error);
+
       toast.error("Something went wrong !");
     },
   });
-  const { isLoading, error, } = updateMutation;
+  const { isLoading, error } = updateMutation;
 
   const togglePasswordVisibility = (field) => {
     switch (field) {
@@ -94,18 +92,16 @@ const ChangePassword = () => {
                   onSubmit={async (values, { setSubmitting, resetForm }) => {
                     try {
                       await updateMutation.mutate(values);
-                
+
                       // Only resetForm and setSubmitting if the mutation was successful
                       if (updateMutation.isSuccess) {
                         resetForm();
                         setSubmitting(false);
-                        console.log("reset Form")
                       }
                     } catch (error) {
                       // Handle any errors during the mutation
-                      console.error('Error during mutation:', error);
+                      console.error("Error during mutation:", error);
                     }
-                
                   }}
                 >
                   {({

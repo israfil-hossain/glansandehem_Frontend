@@ -29,7 +29,7 @@ const CommonTable = ({
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  console.log("Data", data);
+
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));

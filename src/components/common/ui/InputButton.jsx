@@ -35,9 +35,9 @@ const InputButton = ({ setPostCode, setSize, postCode, size }) => {
     };
     if (typeof window !== "undefined") {
       localStorage.setItem("formData", JSON.stringify(formData));
-      console.log({formData})
+    
       navigate("/service");
-      console.log("Click")
+  
     }
    
     
