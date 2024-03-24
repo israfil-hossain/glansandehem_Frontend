@@ -10,6 +10,11 @@ import {
 import { useFormData } from "@/context/FormDataContext";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+import Autocomplete from "@mui/material/Autocomplete";
+import { postalCodeData } from "@/constants/Data/postalCode";
+import TextField from "@mui/material/TextField";
+import { Form, Formik } from "formik";
+import dateTimeValidation from "@/validations/service_validations/DateTimeValidation";
 
 export default function DateTime({ onSubmit, prevStep }) {
   const { formData, setFormData } = useFormData();
@@ -22,8 +27,6 @@ export default function DateTime({ onSubmit, prevStep }) {
     dogs: false,
     otherPets: false,
   });
-
-
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -56,20 +59,6 @@ export default function DateTime({ onSubmit, prevStep }) {
     }
   };
 
-  const handlePostalChange = (e) => {
-    const value = parseInt(e.target.value.replace(/\D/g, ""));
-    if (isNaN(value)) {
-      setError("Invalid postal code (only numbers allowed)");
-    }
-
-    if (!isValid(value)) {
-      setError("Invalid postal code");
-    }
-
-    setError("");
-    setPostalCode(value);
-  };
-
   const handleSubmit = () => {
     if (!formData.address || !formData.startDate || !postalCode) {
       setError(
@@ -87,6 +76,25 @@ export default function DateTime({ onSubmit, prevStep }) {
 
   return (
     <>
+      <Formik
+        initialValues={{
+          address: "", 
+
+        }}
+        validationSchema={dateTimeValidation}
+        onSubmit={handleSubmit}
+      >
+        {({
+          values,
+          handleChange,
+          errors,
+          touched,
+          isSubmitting,
+          handleSubmit,
+          setFieldValue,
+        }) => <Form></Form>}
+      </Formik>
+
       <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-5">
         <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
           {t("service.where")}
@@ -100,14 +108,24 @@ export default function DateTime({ onSubmit, prevStep }) {
             value={formData?.address}
             onChange={handleInputChange}
           />
-          <input
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={postalCodeData}
+            sx={{ width: 400 }}
+            renderInput={(params) => (
+              <TextField {...params} label="PostalCode" sx={{}} />
+            )}
+          />
+
+          {/* <input
             type="number"
             name="postalCode"
             className="border-gray-300 px-2 py-3 border w-full"
             placeholder="PostalCode"
             defaultValue={postalCode}
             onChange={handlePostalChange}
-          />
+          /> */}
         </div>
 
         <PetChecked pets={pets} setPets={setPets} setFormData={setFormData} />
@@ -123,7 +141,7 @@ export default function DateTime({ onSubmit, prevStep }) {
             defaultValue={formData?.startDate}
             className="py-3 px-5 border"
             onChange={handleInputChange}
-            min={new Date().toISOString().slice(0, 16)} 
+            min={new Date().toISOString().slice(0, 16)}
           />
         </div>
 
