@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     onError: (error) => {
       // Handle update error, e.g., display an error message
      
-      toast.error("Something went wrong !");
+      toast.error(error?.response?.data?.message ?? "Something went Wrong !");
     },
   });
 

@@ -13,12 +13,14 @@ import { t } from "i18next";
 import Autocomplete from "@mui/material/Autocomplete";
 import { postalCodeData } from "@/constants/Data/postalCode";
 import TextField from "@mui/material/TextField";
-import { Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import dateTimeValidation from "@/validations/service_validations/DateTimeValidation";
+import { Progress } from "../common/Progress";
 
 export default function DateTime({ onSubmit, prevStep }) {
   const { formData, setFormData } = useFormData();
   const [postalCode, setPostalCode] = useState(formData?.postalCode);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
   const [error, setError] = useState("");
@@ -59,7 +61,7 @@ export default function DateTime({ onSubmit, prevStep }) {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (values) => {
     if (!formData.address || !formData.startDate || !postalCode) {
       setError(
         "Please fill in the required fields: Address, Postal Code, or Date & Time"
@@ -69,7 +71,9 @@ export default function DateTime({ onSubmit, prevStep }) {
 
     setFormData((prev) => ({
       ...prev,
+      ...values,
       postalCode: postalCode,
+
     }));
     onSubmit();
   };
@@ -78,8 +82,8 @@ export default function DateTime({ onSubmit, prevStep }) {
     <>
       <Formik
         initialValues={{
-          address: "", 
-
+          address: "",
+          postalCode: null,
         }}
         validationSchema={dateTimeValidation}
         onSubmit={handleSubmit}
@@ -92,100 +96,137 @@ export default function DateTime({ onSubmit, prevStep }) {
           isSubmitting,
           handleSubmit,
           setFieldValue,
-        }) => <Form></Form>}
-      </Formik>
+        }) => (
+          <Form>
+            <>{JSON.stringify(values)}</>
+            <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-5">
+              <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
+                {t("service.where")}
+              </h2>
+              <div className="mb-4  grid lg:grid-cols-2 grid-cols-1 gap-4  justify-center items-center">
+                <div className="">
+                  <Field
+                    type="text"
+                    name="address"
+                    id="address"
+                    autoComplete="address"
+                    value={values.address}
+                    placeholder={t("address")}
+                    onChange={(e) => {
+                      const newValue = e.target.value;
+                      setFieldValue("address", newValue);
 
-      <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-5">
-        <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
-          {t("service.where")}
-        </h2>
-        <div className="mb-4  flex lg:flex-row flex-col gap-4 ">
-          <input
-            type="text"
-            className="border-gray-300 px-2 py-3 border w-full"
-            placeholder="Street address and number"
-            name="address"
-            value={formData?.address}
-            onChange={handleInputChange}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={postalCodeData}
-            sx={{ width: 400 }}
-            renderInput={(params) => (
-              <TextField {...params} label="PostalCode" sx={{}} />
-            )}
-          />
+                      setFormData((prevFormData) => ({
+                        ...prevFormData,
+                        address: newValue,
+                      }));
+                    }}
+                    className={`flex items-center justify-between appearance-none  w-full px-3  py-4 border border-gray-300 
+                      rounded-md shadow-sm placeholder-gray-400 
+                      focus:ring-green-500 focus:border-green-500  sm:text-sm ${
+                        touched.address && errors.address
+                          ? "border-red-500"
+                          : ""
+                      }`}
+                    error={touched.address && errors.address}
+                  />
 
-          {/* <input
-            type="number"
-            name="postalCode"
-            className="border-gray-300 px-2 py-3 border w-full"
-            placeholder="PostalCode"
-            defaultValue={postalCode}
-            onChange={handlePostalChange}
-          /> */}
-        </div>
+                  {touched.address && errors.address && (
+                    <p className="mt-2 text-sm text-red-600 ">
+                      {errors.address}
+                    </p>
+                  )}
+                </div>
+                <div className="">
+                  <Field
+                    name="postalCode"
+                    fullWidth
+                    label="Postal Code"
+                    component={Autocomplete}
+                    options={postalCodeData} // Use imported data
+                    getOptionLabel={(option) => option.label || option.value} // Assuming your options have label or value property
+                    onChange={(event, newValue) => {
+                      if (newValue) {
+                        setFieldValue("postalCode", newValue.value);
+                      }
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="PostalCode"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: isLoading ? <Progress /> : null,
+                        }}
+                      />
+                    )}
+                  />
+                  {errors.postalCode && (
+                    <ErrorMessage
+                      name="postalCode"
+                      component="div"
+                      className="text-red-500"
+                    />
+                  )}
+                </div>
+              </div>
 
-        <PetChecked pets={pets} setPets={setPets} setFormData={setFormData} />
+              <div className="mb-4 flex flex-col gap-4">
+                <label className=" text-sm font-bold" htmlFor="date-time">
+                  <span className="text-red-500">* </span>{t("datetime.dateandtime")}
+                </label>
+                <input
+                  id="date-time"
+                  type="datetime-local"
+                  name="startDate"
+                  defaultValue={formData?.startDate}
+                  className="py-3 px-5 border"
+                  onChange={handleInputChange}
+                  min={new Date().toISOString().slice(0, 16)}
+                />
+              </div>
+              <PetChecked
+                pets={pets}
+                setPets={setPets}
+                setFormData={setFormData}
+              />
+              <div>
+                {error && (
+                  <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
+                    <FrownIcon className="mr-2 text-red-500" />
+                    <p>{"Please Fillup Required Filled  "}</p>
+                  </div>
+                )}
+              </div>
 
-        <div className="mb-4 flex flex-col gap-4">
-          <label className=" text-sm font-bold" htmlFor="date-time">
-            {t("datetime.dateandtime")}
-          </label>
-          <input
-            id="date-time"
-            type="datetime-local"
-            name="startDate"
-            defaultValue={formData?.startDate}
-            className="py-3 px-5 border"
-            onChange={handleInputChange}
-            min={new Date().toISOString().slice(0, 16)}
-          />
-        </div>
+              <div className="container mb-8 mt-4 flex justify-around">
+                {/* back button */}
+                <button
+                  className={`cursor-pointer rounded-xl border-2 border-slate-300 bg-green-500 
+                    px-4 py-2 font-semibold uppercase text-white transition
+                    ease-in-out hover:bg-primary hover:text-white
+                  `}
+                  onClick={prevStep}
+                >
+                  {t("back")}
+                </button>
 
-        {error && (
-          <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
-            <FrownIcon className="mr-2 text-red-500" />
-            <p>{error}</p>
-          </div>
-        )}
-        {postalCode?.length < 4 && !formData?.startDate && (
-          <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
-            <FrownIcon className="mr-2 text-red-500" />
-            <p>
-              {
-                "Please Fillup Required Filled ( Address or PostalCode or Date and Time) "
-              }
-            </p>
-          </div>
-        )}
-      </div>
-
-      <div className="container mb-8 mt-4 flex justify-around">
-        {/* back button */}
-        <button
-          className={`cursor-pointer rounded-xl border-2 border-slate-300 bg-green-500 
-         px-4 py-2 font-semibold uppercase text-white transition
-         ease-in-out hover:bg-primary hover:text-white
-       `}
-          onClick={prevStep}
-        >
-          {t("back")}
-        </button>
-
-        {/* next button  */}
-        <button
-          className={`cursor-pointer rounded-xl border-2 border-slate-300 bg-green-500 
+                {/* next button  */}
+                <button
+                  className={`cursor-pointer rounded-xl border-2 border-slate-300 bg-green-500 
                 px-4 py-2 font-semibold uppercase text-white transition
                 ease-in-out hover:bg-primary hover:text-white
               `}
-          onClick={handleSubmit}
-        >
-          {t("next")}
-        </button>
-      </div>
+                  disabled={Object.keys(errors).length > 0 || !touched}
+                  onClick={handleSubmit}
+                >
+                  {t("next")}
+                </button>
+              </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 }

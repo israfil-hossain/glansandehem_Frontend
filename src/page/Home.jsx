@@ -70,8 +70,8 @@ const Home = () => {
       navigate("/login");
     },
     onError: (error) => {
-      console.error("Error creating data:", error);
-      toast.error("Something is wrong ", error?.response?.data?.message);
+     
+      toast.error(error?.response?.data?.message ?? "Something went Wrong !");
     },
   });
 
@@ -86,8 +86,8 @@ const Home = () => {
         userEmail: formData?.userEmail,
         userPidNumber: formData?.userPidNumber,
         userPhoneNumber: formData?.userPhoneNumber,
-        areaInSquareMeters: formData?.areaInSquareMeters,
-        postalCode: formData?.postalCode,
+        areaInSquareMeters: Number(formData?.areaInSquareMeters),
+        postalCode: Number(formData?.postalCode),
         address: formData?.address,
         cleaningDurationInHours: formData?.cleaningDurationInHours,
         subscriptionFrequency: formData?.cleaningFrequency,
