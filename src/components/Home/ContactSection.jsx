@@ -6,7 +6,7 @@ const ContactSection = () => {
     <div className='bg-image min-h-[60vh] mb-10 w-[90%] rounded-lg container flex lg:flex-row flex-col justify-center items-center gap-x-10'>
         <div className='w-1/2'>
             <h3 className='text-xl text-white'>Interested but need more information ? </h3>
-            <p className='text-lg text-white'>{" We've got you. Leave your details here and one of our friendly Glansandehem will contact you right away"}  </p>
+            <p className='text-lg text-white'>{" We've got you. Leave your details here and one of our friendly Glänsandehem will contact you right away"}  </p>
         </div>
         <div className='min-w-[350px]'>
             <div className='bg-white rounded-xl  h-96 flex flex-col justify-center items-center w-full'>

@@ -98,8 +98,8 @@ export default function DateTime({ onSubmit, prevStep }) {
           setFieldValue,
         }) => (
           <Form>
-            <>{JSON.stringify(values)}</>
-            <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-5">
+            {/* <>{JSON.stringify(values)}</> */}
+            <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-12">
               <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
                 {t("service.where")}
               </h2>

@@ -9,19 +9,21 @@ import GridCard from "../common/ui/GridCard.jsx";
 import { CommonProgress } from "../common/CommonProgress.jsx";
 import { useNavigate } from "react-router-dom";
 import adminAPI from "@/api/adminAPI.js";
+import { useTranslation } from "react-i18next";
 
-const ProfileCard = () => {
+const ProfileCard = ({data}) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const {t} = useTranslation();
 
-  // GetCleaningUserSubscription
-  const {
-    data: userSubscriptionData = {},
-    isLoading: userSubscriptionLoading,
-  } = useQuery([API.GetCleaningUserSubscription]);
+  // // GetCleaningUserSubscription
+  // const {
+  //   data: userSubscriptionData = {},
+  //   isLoading: userSubscriptionLoading,
+  // } = useQuery([API.GetCleaningUserSubscription]);
 
   const paymentEndpoint =
-    API.PaymentReceive + `${userSubscriptionData?.data?.currentBooking?._id}`;
+    API.PaymentReceive + `${data?.currentBooking?._id}`;
 
   const handlePayment = async () => {
     try {
@@ -42,56 +44,54 @@ const ProfileCard = () => {
     }
   };
 
-  if (userSubscriptionLoading) {
-    return <CommonProgress />;
-  }
+
 
   return (
     <Card className="lg:mx-5 mx-0 w-full rounded-lg bg-white shadow-md">
       <CardHeader>
         <div className="grid lg:grid-cols-2 grid-cols-1 justify-between  flex-col ">
           <div className="bg-secondprimary text-white py-1 lg:text-lg text-[12px] px-4 w-1/2">
-            Service Details
+            {t("servicedetails")}
           </div>
           <div className="flex justify-between lg:mt-0 mt-5  ">
             <div
               className={`${
-                userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                data?.currentBooking?.bookingStatus ===
                 "BookingCancelled"
                   ? "bg-red-300"
-                  : userSubscriptionData?.data?.currentBooking
+                  : data?.currentBooking
                       ?.bookingStatus === "BookingServed"
                   ? "bg-blue-500"
-                  : userSubscriptionData?.data?.currentBooking
+                  : data?.currentBooking
                       ?.bookingStatus === "BookingCompleted"
                   ? "bg-[#0b7911a2]" // Use the intended background color for confirmed bookings
                   : "bg-yellow-500"
               } text-white  px-4 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
             >
-              {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+              {data?.currentBooking?.bookingStatus ===
               "BookingCancelled"
-                ? "Booking Cancelled"
-                : userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                ? `${t("bookingCanceled")}`
+                : data?.currentBooking?.bookingStatus ===
                   "BookingServed"
-                ? "Booking Confirmed"
-                : userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                ? `${t("bookingConfirmed")}`
+                : data?.currentBooking?.bookingStatus ===
                   "BookingCompleted"
-                ? "Booking Completed" // Use the intended background color for confirmed bookings
-                : "Booking Processing..."}
+                ? `${t("bookingComplete")}` // Use the intended background color for confirmed bookings
+                : `${t("bookingProcessing")}`}
             </div>
 
             <div
               className={` ${
-                userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+                data?.currentBooking?.paymentStatus ===
                 "PaymentCompleted"
                   ? "bg-[#0b7911a2] "
                   : "bg-red-300" // Use the intended background color for confirmed bookings
               } text-white  px-4 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px] `}
             >
-              {userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+              {data?.currentBooking?.paymentStatus ===
               "PaymentCompleted"
-                ? "Payment Paid"
-                : "Pending Payment"}
+                ? `${t("paymentPaid")}`
+                : `${t("pendingPaid")}`}
             </div>
           </div>
         </div>
@@ -103,22 +103,22 @@ const ProfileCard = () => {
         <div className="flex lg:flex-row flex-col  justify-between ">
           <div className="flex justify-start space-x-10 my-2 w-full items-center">
             <p className="flex justify-center items-center rounded-xl py-1 bg-indigo-500 px-4 lg:text-sm text-[12px] text-white text-center ">
-              Service Taken{" "}
+              {t("serviceTaken")}
             </p>
             <h2 className=" lg:text-lg text-[14px] font-bold text-blue-900">
-              {userSubscriptionData?.data?.subscriptionFrequency}
+              {data?.subscriptionFrequency}
             </h2>
           </div>
           <div className="flex justify-start space-x-10 my-2 w-full items-center">
             <p className="flex justify-center items-center rounded-xl py-1 bg-indigo-500 px-3 lg:text-[14px] text-[10px] text-white text-center ">
-              Cleaning Time
+              {t("cleaningTime")}
             </p>
             <div>
               <h2 className="mb-3  lg:text-lg text-[12px] font-bold text-blue-900">
-                {userSubscriptionData?.data?.cleaningDurationInHours} Hours
+                {data?.cleaningDurationInHours} Hours
               </h2>
               <h2 className="mb-3 lg:text-lg text-[12px] font-semibold text-blue-900">
-                {formatDatewithTime(userSubscriptionData?.data?.startDate)}
+                {formatDatewithTime(data?.startDate)}
               </h2>
             </div>
           </div>
@@ -129,36 +129,36 @@ const ProfileCard = () => {
           <div className="flex items-center space-x-1">
             <div className="flex items-center">
               <FaChartArea className="mr-1" />
-              Area Size :
+              {t("service.apartment")} :
             </div>
             <p>
-              {userSubscriptionData?.data?.areaInSquareMeters} m<sup>2</sup>
+              {data?.areaInSquareMeters} m<sup>2</sup>
             </p>
           </div>
           <div className="flex items-center space-x-1">
             <div className="flex items-center">
               <FaQrcode className="mr-1" />
-              Postal Code :
+              {t("postalCode")} :
             </div>
-            <p>{userSubscriptionData?.data?.postalCode}</p>
+            <p>{data?.postalCode}</p>
           </div>
           <div className="flex items-center space-x-1">
-            {(userSubscriptionData?.data?.hasCats ||
-              userSubscriptionData?.data?.hasDogs ||
-              userSubscriptionData?.data?.hasOtherPets) && (
+            {(data?.hasCats ||
+              data?.hasDogs ||
+              data?.hasOtherPets) && (
               <>
                 <CheckIcon className="h-5 w-5 text-green-500" />
                 <span className="text-gray-700 text-sm font-medium">
-                  Have Pets
+                  {t("havePets")}
                 </span>
               </>
             )}
             <div className="flex items-center space-x-1 pl-5">
               <PawPrintIcon className="text-gray-700 h-5 w-5" />
               <span className="text-gray-700 text-sm font-medium">
-                {userSubscriptionData?.data?.hasCats && "Cats , "}
-                {userSubscriptionData?.data?.hasDogs && "Dogs , "}
-                {userSubscriptionData?.data?.hasOtherPets && "Others "}
+                {data?.hasCats && "Cats , "}
+                {data?.hasDogs && "Dogs , "}
+                {data?.hasOtherPets && "Others "}
               </span>
             </div>
           </div>
@@ -167,70 +167,70 @@ const ProfileCard = () => {
         <div className=" pt-4">
           <div className="rounded-lg bg-slate-100 p-5 space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-700 text-sm">Service Fees</span>
+              <span className="text-gray-700 text-sm">{t("serviceFee")}</span>
               <span className="text-gray-900 text-sm font-medium">
-                {userSubscriptionData?.data?.cleaningPrice?.subscriptionPrice}{" "}
+                {data?.cleaningPrice?.subscriptionPrice || "N/A"}{" "}
                 kr
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">
-                Cleaning{" "}
-                {userSubscriptionData?.data?.cleaningPrice?.subscriptionPrice}{" "}
-                kr/h x {userSubscriptionData?.data?.cleaningDurationInHours} h
+                {t("cleaning")}{" "}
+                {data?.cleaningPrice?.subscriptionPrice}{" "}
+                kr/h x {data?.cleaningDurationInHours || "N/A"} h
               </span>
               <span className="text-gray-900 text-sm font-medium">
-                {userSubscriptionData?.data?.currentBooking?.cleaningPrice} kr
+                {data?.currentBooking?.cleaningPrice || "N/A"} kr
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-700 text-sm">Discount Price </span>
+              <span className="text-gray-700 text-sm">{t("discount")} </span>
               <span className="text-gray-900 text-sm font-medium">
-                {userSubscriptionData?.data?.currentBooking?.discountAmount} kr
+                {data?.currentBooking?.discountAmount || "N/A"} kr
               </span>
             </div>
             <div className="flex justify-between py-2">
               <span className="text-gray-700 text-sm">
-                Eco-friendly cleaning supplies
+                {t("service.ecofriendly_supplies")}
               </span>
               <span className="text-gray-900 text-sm font-medium">
-                {userSubscriptionData?.data?.currentBooking?.suppliesCharges} kr
+                {data?.currentBooking?.suppliesCharges || "N/A"} kr
               </span>
             </div>
             <div className="flex justify-between py-2">
               <span className="text-gray-700 text-sm font-medium">
-                Additional Fees
+                {t("service.additionalFee")}
               </span>
               <span className="text-gray-900 text-sm font-medium">
-                {userSubscriptionData?.data?.currentBooking?.additionalCharges}{" "}
+                {data?.currentBooking?.additionalCharges}{" "}
                 kr
               </span>
             </div>
 
             <div className="flex justify-between py-2">
               <span className="text-gray-700 text-sm font-medium">
-                Additional Fees Description
+                {t("service.additionalDescription")}
               </span>
               <span className="text-grey-900 text-sm font-medium">
-                {userSubscriptionData?.data?.currentBooking?.remarks}{" "}
+                {data?.currentBooking?.remarks}{" "}
               </span>
             </div>
 
             <div className="flex justify-between pt-2">
               <span className="text-gray-800 text-lg font-bold">TOTAL</span>
               <span className="text-2xl font-bold text-blue-800">
-                {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
+                {data?.currentBooking?.totalAmount} kr
               </span>
             </div>
 
-            {userSubscriptionData?.data?.currentBooking?.paymentStatus ===
+            {data?.currentBooking?.paymentStatus ===
             "PaymentCompleted" ? (
               <div className="flex justify-between pt-2">
                 <span className="text-gray-800 text-lg font-bold">
                   TOTAL PAID
                 </span>
                 <span className="text-2xl font-bold text-blue-800">
-                  {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
+                  {data?.currentBooking?.totalAmount} kr
                 </span>
               </div>
             ) : (
@@ -241,9 +241,9 @@ const ProfileCard = () => {
 
                 <div className="flex space-x-5 space-y-4 justify-center items-center lg:flex flex-col">
                   <span className="text-2xl font-bold text-blue-800">
-                    {userSubscriptionData?.data?.currentBooking?.totalAmount} kr
+                    {data?.currentBooking?.totalAmount} kr
                   </span>
-                  {userSubscriptionData?.data?.currentBooking?.bookingStatus ===
+                  {data?.currentBooking?.bookingStatus ===
                     "BookingServed" && (
                     <button
                       className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 

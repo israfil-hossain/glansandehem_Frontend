@@ -79,7 +79,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
     }
   };
   return (
-    <div className="w-full  my-8 p-6 bg-white shadow-lg rounded-lg">
+    <div className="w-full  my-8 p-6 bg-white shadow-lg rounded-lg lg:px-12">
       <h1 className="text-3xl font-bold text-center mb-6">{t("address")} </h1>
       <p className="text-sm text-center mb-8">{t("address_.our_dedicated")}</p>
       <Formik
@@ -271,7 +271,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
               <label className="text-sm font-medium" htmlFor="terms">
                 {/* {t("address_.accept")} */}I accept{" "}
                 <Link
-                  to="https://glansandehem.se/terms-conditions/"
+                  to="https://Glänsande hem.se/terms-conditions/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -279,7 +279,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
                 </Link>{" "}
                 and{" "}
                 <Link
-                  to="https://glansandehem.se/privacy_policy/"
+                  to="https://Glänsande hem.se/privacy_policy/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -35,7 +35,7 @@ export const convertToTitleCase = (str = "") => {
 };
 
 const Duration = (size) => {
-  if (size < 40) {
+  if (size < 41) {
     return 2;
   } else if (size >= 41 && size <= 60) {
     return 2.5;
@@ -66,7 +66,7 @@ const Duration = (size) => {
 
 
 const phoneNumber = "+46761525840"; // Replace with your desired phone number
-const message  = "Hello, WelCome to GlansanDehem.  let's chat!";
+const message  = "Hello, WelCome to Glänsande hem.  let's chat!";
 
 export const generateWhatsAppLink = () => {
   const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(

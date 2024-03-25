@@ -25,9 +25,11 @@ import useCreate from "../hooks/useCreate";
 import usePatch from "../hooks/usePatch";
 import { profile } from "@/assets";
 import GridCard from "@/components/common/ui/GridCard";
+import { useTranslation } from "react-i18next";
 
 const ProfileSetting = () => {
   const { userData, userRefetch } = useAuthUserContext();
+  const {t} = useTranslation();
  
 
   const [open, setOpen] = useState(false);
@@ -139,7 +141,7 @@ const ProfileSetting = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <p className="font-bold text-lg">Changes Password</p>
+                        <p className="font-bold text-lg">{t("changePassword")}</p>
                       </Box>
 
                       <div className="mt-5 px-5">
@@ -147,7 +149,7 @@ const ProfileSetting = () => {
                           htmlFor="password"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Old Password
+                          {t("oldPassword")}
                         </label>
                         <div className="mt-1">
                           <div className="relative">
@@ -192,7 +194,7 @@ const ProfileSetting = () => {
                           htmlFor="newPassword"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          New Password
+                          {t("newPassword")}
                         </label>
                         <div className="mt-1">
                           <div className="relative">
@@ -237,7 +239,7 @@ const ProfileSetting = () => {
                           htmlFor="retypePassword"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Retype New Password
+                         {t("retype")}
                         </label>
                         <div className="mt-1">
                           <div className="relative">
@@ -327,6 +329,7 @@ const ProfileSetting = () => {
 
 const ProfileSection = ({ handleOpen, userData, refetch }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const {t} = useTranslation();
 
   const { mutateAsync: updateProfile, isLoading: createLoading } = usePatch({
     endpoint: API.UpdateProfilePicture, // Replace with your actual API endpoint
@@ -368,15 +371,15 @@ const ProfileSection = ({ handleOpen, userData, refetch }) => {
         />
       </div>
       <div className="text-lg text-gray-800 font-bold font-sans p-4 mb-5">
-        Personal Information
+        {t("personalInformation")}
       </div>
       <div className="lg:flex space-x-4">
         <div className=" px-4   w-full ">
           
-          <GridCard title={"Name"} value={userData?.fullName} />
-          <GridCard title={"Email"} value={userData?.email} />
+           <GridCard title={t("address_.fullname")} value={userData?.fullName} />
+           <GridCard title={t("address_.email")} value={userData?.email} />
           <GridCard title={"Address"} value={userData?.address || "N/A"} />
-          <GridCard title={"Phone"} value={userData?.phoneNumber || "N/A"} />
+          <GridCard title={t("address_.phone")} value={userData?.phoneNumber || "N/A"} />
 
           
         </div>

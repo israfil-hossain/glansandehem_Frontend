@@ -1,7 +1,6 @@
 {
-  "signin": "Logga in", 
-  "signup": "Bli Medlem", 
-
+  "signin": "Logga in",
+  "signup": "Bli Medlem",
   "navigation": {
     "home": "Startseite",
     "about": "Über"
@@ -16,138 +15,114 @@
       "description": "Dies ist die About-Seite"
     }
   },
-  "banner":{
-    "title": "VILL DU NJUTA AV ETT FUNKANDE RENT HEM ? ", 
+  "banner": {
+    "title": "VILL DU NJUTA AV ETT FUNKANDE RENT HEM ? ",
     "subtext": "Skippa stressen – låt våra fantastiska städare skapa städmagi istället. \n 💙 \n Med en 100 % kundnöjdhetsgaranti och ett betyg på 4,8/5 lovar vi att du inte kommer att ångra dig! ",
     "bannerButton": "Se städtider",
-    "size": "Hemstorlek", 
+    "size": "Hemstorlek",
     "postcode": "Postnummer"
   },
-  "section":{
-    "title": "Glansandehem - MER ÄN BARA HEMSTÄDNING",
-    "subtitle":"Vårt uppdrag är att skapa jobb och möjligheter för städare, samtidigt som du skapar frihet i ditt liv. Tillsammans med våra kunder har vi redan skapat arbete åt tusentals städare som i sin tur har städat mer än 1 000 000 hem."
+  "section": {
+    "title": "Glänsande hem - MER ÄN BARA HEMSTÄDNING",
+    "subtitle": "Vårt uppdrag är att skapa jobb och möjligheter för städare, samtidigt som du skapar frihet i ditt liv. Tillsammans med våra kunder har vi redan skapat arbete åt tusentals städare som i sin tur har städat mer än 1 000 000 hem."
   },
-  "accordionTitle":{
-    "title": "DETTA INGÅR I STÄDINGEN", 
-    "subtext":"SE VAD INGÅR I VÅR GRUNDTJÄNST.",
-    "textinfo": "Hur mycket hemstädning kostar beror på vilken frekvens du vill ha på städningen. Tiden det tar att utföra städningen i just ditt hem har att göra med hur stort ditt hem är.\n\n Vår personal tar med städprodukter och trasor. Vi lämnar trasorna hos dig efter din första städning, så att du kan tvätta dem själv till nästa städning. \n\n Det du behöver hemma är en mopp, hink och dammsugare. Vi vill också att du innan din städning berättar vilka områden du vill att vi lägger extra vikt på i ditt hem."
+  "accordionTitle": {
+    "title": "Vad ingår i en grundstädning?"
   },
-  "accordion":[
+  "accordion": [
     {
-      "question": "What is artificial intelligence (AI)?",
-      "answer":
-        "Artificial Intelligence (AI) refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation."
+      "question": "I allmänhet / alla utrymmen",
+      "answer": "Damma av alla plana ytor (så högt som rengöringsmedlet når) Dammsugning av golv och mattor Fuktiga golvmoppningar (om golvmaterial lämpar sig för fuktmoppning) Fläckborttagning från dörrkarmar, dörrhandtag och ljusbrytare Torka av speglar och andra glasytor (exklusive fönster) Kassera skräp (om kunden meddelar var/ordnar åtkomst till sopområdet)"
     },
     {
-      "question": "How does machine learning differ from traditional programming?",
-      "answer":
-        "In traditional programming, explicit instructions are provided to a computer to perform a task. In contrast, machine learning allows computers to learn from data and improve their performance over time without being explicitly programmed, making it well-suited for complex, data-driven tasks."
+      "question": "Sovrum ",
+      "answer": " Damma av alla plana ytor (så högt som rengöringsmedlet når) Dammsugning av golv och mattor Fuktiga golvmoppningar (om golvmaterial lämpar sig för fuktmoppning) Torka av speglar och andra glasytor (exklusive fönster)"
     },
     {
-      "question": "What are the potential ethical concerns associated with AI?",
-      "answer":
-        "Ethical concerns in AI include issues related to bias in algorithms, privacy implications, job displacement, and the responsible use of autonomous systems. Addressing these concerns requires a combination of technical advancements, policy development, and ongoing collaboration between industry, academia, and regulatory bodies."
+      "question": "Badrum",
+      "answer": "Rengöring av bad, toalett, golv och tvättställ samt fläckborttagning Tvätta duschen och duschväggen i glas Damma av alla plana ytor (där dammsugaren når, mindre än 180 cm i höjd) Dammsugning av golv och mattor Fuktiga golvmoppningar (om golvmaterial lämpar sig för fuktmoppning) Torka av speglar och andra glasytor (exklusive fönster)"
     },
     {
-      "question":
-        "How can businesses benefit from implementing NLP technology?",
-      "answer":
-        "Natural Language Processing (NLP) enables computers to understand, interpret, and generate human language, facilitating communication between humans and machines. Businesses can benefit from NLP by automating customer support, analyzing customer feedback, extracting insights from unstructured data, and improving overall efficiency in handling language-based tasks."
+      "question": "Kök",
+      "answer": " Rengöring av diskho, spis och fläktyta Ta bort fläckar på utsidan av mikrovågsugn, kylskåp och diskmaskin Torka av andra köksmaskiner (t.ex. kaffebryggare, brödrost, mixer) Damma av alla plana ytor (så högt som rengöringsmedlet når) Dammsugning av golv och mattor Fuktiga golvmoppningar (om golvmaterial lämpar sig för fuktmoppning) Torka av speglar och andra glasytor (exklusive fönster)"
+    },
+    {
+      "question": "Arbetsuppgifter ingår inte i vanlig städning",
+      "answer": "För att undvika förvirring ingår inte följande uppgifter i den beställda tjänsten. Torka/städa väggar och damma av bilder Avtorkning/rengöring av tak och andra ytor som inte kan nås utan specialutrustning Borttagning av extremt svåra fläckar Rengöring av golvbrunnen Rengöring av luktfällor Rengöring av ventilationsventiler och ventilationsöppningar Flytta tunga möbler och hushållsapparater Renoveringsstädning Städning efter renovering Rengöring av möbler"
     }
   ],
-  "slider":[
-    {
-      "id":1,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468244/Flowentech/home_gbmuzv.png",
-      "title" : "Home Cleaning",
-      "subtitle":""
-    },
-    {
-      "id":2,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468385/Flowentech/window_oafufn.png",
-      "title" : "Window Cleaning",
-      "subtitle":""
-    },
-    {
-      "id":3,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468225/Flowentech/moving_zskqyc.png",
-      "title" : "Moving Cleaning",
-      "subtitle":""
-    },
-    {
-      "id":4,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468229/Flowentech/office_sffpu3.png",
-      "title" : "Office Cleaning",
-      "subtitle":""
-    },
-    {
-      "id":5,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468235/Flowentech/property_hfzvoy.png",
-      "title" : "Property Cleaning",
-      "subtitle":""
-    },
-    {
-      "id":6,
-      "image":"https://res.cloudinary.com/dpc1nydxn/image/upload/v1705468240/Flowentech/deep_iu0xpo.png",
-      "title" : "Deep Cleaning",
-      "subtitle":""
-    }
-  ],
-
-
-
-
   "serviceStepper": "Service",
-  "dateandtime":"DATUM TID",
+  "dateandtime": "DATUM TID",
   "address": "ADRESS",
   "payment": "BETALNING",
-  "overview":"Översikt",
+  "postalCode": "postnummer",
+  "havePets": "Ha husdjur",
+  "serviceFee": "Serviceavgifter",
+  "discount" : "Rea-pris",
+  "overview": "Översikt",
   "cleaning": "Rengöring",
-  "home_cleaning":"HEMSTÄDNING",
-  "cleaning_duration":"Rengöringstid",
+  "home_cleaning": "HEMSTÄDNING",
+  "cleaning_duration": "Rengöringstid",
   "frequency": "Rengöringsfrekvens",
-
-
-  "service":{
-    "tellus":"Berätta för oss om dina städbehov",
+  "service": {
+    "tellus": "Berätta för oss om dina städbehov",
     "apartment": "Lägenhetsstorlek",
-    "cleaningDuration":"Rengöringstid" ,
-    "enter_apartment":"Ange din lägenhetsstorlek",
-    "hourse":"timmar",
-    "recommendation":"timmar (rekommendation)",
-    "HowOften": "Hur ofta ska vi städa?", 
-    "with_glansandehem":"Med Glansandehem får du en vanlig städare !",
-    "mostpopular":"Mest populär", 
-    "ecofriendly_supplies":"Miljövänliga städmaterial", 
-    "eco_info":"miljövänliga och allergivänliga städmaterial ingår i din beställning! Har du en dammsugare, hink & mopp? Vi använder dem.",
+    "cleaningDuration": "Rengöringstid",
+    "enter_apartment": "Ange din lägenhetsstorlek",
+    "hourse": "timmar",
+    "recommendation": "timmar (rekommendation)",
+    "HowOften": "Hur ofta ska vi städa?",
+    "with_Glänsande hem": "Med Glänsande hem får du en vanlig städare !",
+    "mostpopular": "Mest populär",
+    "ecofriendly_supplies": "Miljövänliga städmaterial",
+    "eco_info": "miljövänliga och allergivänliga städmaterial ingår i din beställning! Har du en dammsugare, hink & mopp? Vi använder dem.",
     "home_clean": "Hemstädning",
-    "before_rut": "Före RUT-avdrag", 
-    "cleaning":"Rengöring",
+    "before_rut": "Före RUT-avdrag",
+    "cleaning": "Rengöring",
     "where": "Var kommer vi för att rengöra?",
-    "without":"utan RUT-avdrag"
+    "without": "utan RUT-avdrag",
+    "additionalFee": "Extra avgifter",
+    "additionalDescription": "Ytterligare avgifter Beskrivning"
   },
-  "datetime":{
-    "pets":"Husdjur bor här", 
-    "what_kind":"Vilken sort? Låt oss välja en städare utan allergier", 
-    "dateandtime":"Datum och Tid"
+  "datetime": {
+    "pets": "Husdjur bor här",
+    "what_kind": "Vilken sort? Låt oss välja en städare utan allergier",
+    "dateandtime": "Datum och Tid"
   },
-  "address_":{
-    "our_dedicated":"Vårt engagerade kundvårdsteam är alltid här för att hjälpa och kommer att göra säker på att du är 100% nöjd!",
-    "fullname":"Fullständiga namn",
-    "enter_fullname":"Ange ditt fullständiga namn", 
-    "email": "E-post", 
-    "enter_email": "Ange din e-postadress", 
-    "identity": " Personnummer", 
-    "enter_identity": "Ange ditt personnummer", 
-    "phone": "Telefonnummer", 
-    "enter_phone": "Skriv in ditt telefonnummer", 
-    "how_rut": "Hur RUT-avdrag fungerar", 
-    "rut_deduction": "Svenska skattebetalare har rätt till 50 % rabatt på hemarbete. Ange ditt personnummer - och njut av RUT-avdrag direkt!", 
-    "gift_coupon": "Presentkort eller kupong", 
-    "apply": "Använd kupong", 
+  "address_": {
+    "our_dedicated": "Vårt engagerade kundvårdsteam är alltid här för att hjälpa och kommer att göra säker på att du är 100% nöjd!",
+    "fullname": "Fullständiga namn",
+    "enter_fullname": "Ange ditt fullständiga namn",
+    "email": "E-post",
+    "enter_email": "Ange din e-postadress",
+    "identity": " Personnummer",
+    "enter_identity": "Ange ditt personnummer",
+    "phone": "Telefonnummer",
+    "enter_phone": "Skriv in ditt telefonnummer",
+    "how_rut": "Hur RUT-avdrag fungerar",
+    "rut_deduction": "Svenska skattebetalare har rätt till 50 % rabatt på hemarbete. Ange ditt personnummer - och njut av RUT-avdrag direkt!",
+    "gift_coupon": "Presentkort eller kupong",
+    "apply": "Använd kupong",
     "accept": "Jag accepterar villkor och integritetspolicy"
-  }, 
-  "back": "Tillbaka", 
+  },
+  "back": "Tillbaka",
   "next": "Nästa",
-  "submit":"Skicka in"
+  "submit": "Skicka in",
+  "servicedetails": "Service detaljer", 
+  "bookingCanceled": "Bokning avbruten",
+  "bookingConfirmed": "Bokning bekräftad", 
+  "bookingComplete": "Bokning slutförd", 
+  "bookingProcessing" : "Bokningsbearbetning...",
+  "paymentPaid": "Betalning Betald", 
+  "pendingPaid": "Väntar på betalning", 
+  "serviceTaken": "Service tagen", 
+  "cleaningTime": "Städdags",
+  "hi": "Hej",
+  "dateofjoin": "Anslutningsdatum",
+  "personalInformation": "Personlig information", 
+  "changePassword": "Ändrar lösenord",
+  "oldPassword": "Gammalt lösenord", 
+  "newPassword": "Nytt lösenord", 
+  "retype": "Skriv nytt lösenord igen",
+  "welcome": "Välkommen till"
 }

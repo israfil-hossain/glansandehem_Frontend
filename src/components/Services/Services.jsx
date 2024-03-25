@@ -32,7 +32,7 @@ const Services = ({ onSubmit }) => {
   };
 
   return (
-    <div className="lg:w-md w-full rounded-lg  bg-white py-4 shadow-lg lg:mx-auto lg:px-10">
+    <div className="lg:w-md w-full rounded-lg  bg-white py-4 shadow-lg lg:mx-auto lg:px-12">
       <h2 className={`text-center text-[35px] font-[700] text-secondprimary`}>
         {t("service.tellus")}
       </h2>
@@ -161,7 +161,7 @@ const Services = ({ onSubmit }) => {
               <h3 className="mb-1 text-sm font-medium">
                 {t("service.HowOften")}
               </h3>
-              <p className="mb-4 text-sm">{t("service.with_glansandehem")}</p>
+              <p className="mb-4 text-sm">{t("service.with_Glänsande hem")}</p>
               {cleaningFrequencyLoading ? (
                 <div className="items-center flex justify-center w-full h-24">
                   <Progress />

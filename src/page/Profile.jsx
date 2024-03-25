@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProfileCard from "@/components/Profile/ProfileCard";
 import { useAuthUserContext } from "@/context/AuthUserProvider";
 import { formatDateString } from "@/utils/CommonFunction";
@@ -6,19 +6,45 @@ import GridCard from "@/components/common/ui/GridCard";
 import { profile } from "@/assets";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import DefaultTable from "@/components/common/DefaultTable";
+import { API } from "@/api/endpoints";
+import { useQuery } from "@tanstack/react-query";
+import { earningHeadings } from "@/constants/TableColumns/earningHeadings";
+import { CommonProgress } from "@/components/common/CommonProgress";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const { userData } = useAuthUserContext();
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
+  const {t} = useTranslation();
 
- 
+  const {
+    data: userSubscriptionData = {},
+    isLoading: userSubscriptionLoading,
+  } = useQuery([API.GetCleaningUserSubscription]);
+
+  console.log({userSubscriptionData})
+
+  // const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
+  //   API.GetAllCleaningBooking + `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
+  // ]);
+
+  if (userSubscriptionLoading) {
+    return <CommonProgress />;
+  }
+
+  let nextSchedule = userSubscriptionData?.data?.nextScheduleDate; 
+  console.log({nextSchedule})
+
   return (
     <div className="container h-full overflow-y-hidden">
       <h2 className="lg:text-3xl font-semibold text-secondprimary">
-        👋Hi, {userData?.fullName}
+        👋{t("hi")}, {userData?.fullName}
       </h2>
       <div className="flex w-full justify-center pt-5">
         <div className="rouded-xl flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
-          Welcome To Glansandehem
+          {t("welcome")} Glänsande hem
         </div>
       </div>
 
@@ -31,13 +57,13 @@ const Profile = () => {
               className="w-32 h-32 "
             />
           </div>
-          <GridCard title={"Name"} value={userData?.fullName} />
-          <GridCard title={"Email"} value={userData?.email} />
-          <GridCard title={"Phone Number"} value={userData?.phoneNumber} />
-          <GridCard title={"Address"} value={userData?.address} />
+          <GridCard title={t("address_.fullname")} value={userData?.fullName} />
+          <GridCard title={t("address_.email")} value={userData?.email} />
+          <GridCard title={t("address_.phone")} value={userData?.phoneNumber} />
+          <GridCard title={t("address")} value={userData?.address} />
           <GridCard title={"PID"} value={userData?.pidNumber} />
           <GridCard
-            title={"Date of Join"}
+            title={t("dateofjoin")}
             value={formatDateString(userData?.dateJoined)}
           />
           <Link to="/profile-setting">
@@ -60,8 +86,21 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-full  h-full">
-          <ProfileCard />
+          <ProfileCard data={userSubscriptionData?.data}/>
         </div>
+      </div>
+      <div>
+        {/* Booking History */}
+        {/* <DefaultTable
+          isLoading={bookingLoading}
+          headings={earningHeadings}
+          data={bookingData || []}
+          disablePagination={false}
+          size={size}
+          setSize={setSize}
+          page={page}
+          setPage={setPage}
+        /> */}
       </div>
     </div>
   );

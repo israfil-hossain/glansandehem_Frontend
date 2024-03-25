@@ -24,6 +24,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/common/Progress";
+import AccordionSection from "@/components/Home/AccordionSection";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -125,7 +126,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container mb-10 flex overflow-hidden lg:h-[80vh]  flex-col lg:flex-row lg:space-x-5">
+    <div className="container mb-10 flex overflow-hidden   flex-col lg:flex-row lg:space-x-5">
       <div className=" mx-0 mb-10  w-[100%] rounded-xl lg:mx-auto overflow-y-auto  lg:w-[55%] ">
         <div className="container mt-5">
           <Stepper currentStep={step} steps={steps} />
@@ -134,7 +135,7 @@ const Home = () => {
       </div>
 
       {/* Right side  */}
-      <div className=" w-full lg:mx-5 lg:w-[40%] sticky top-0 right-0  ">
+      <div className=" w-full lg:mx-5 lg:w-[40%]   ">
         <Card className="lg:w-[472px] w-full rounded-lg bg-white shadow-md ">
           <CardHeader className="bg-secondprimary py-4 px-4 ">
             <CardTitle className="text-slate-100 mb-2 text-xl  font-semibold ">
@@ -246,8 +247,13 @@ const Home = () => {
               </div>
             </div>
           </CardContent>
+          
         </Card>
+        <div className="w-full mt-5"><AccordionSection /></div>
+
+        
       </div>
+      
     </div>
   );
 };
