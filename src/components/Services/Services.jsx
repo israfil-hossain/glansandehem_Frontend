@@ -15,7 +15,6 @@ const Services = ({ onSubmit }) => {
   const { data: cleaningFrequency = {}, isLoading: cleaningFrequencyLoading } =
     useQuery([API.GetAllCleaningPrice]);
 
-
   const initialValues = {
     areaInSquareMeters: formData?.areaInSquareMeters,
     cleaningDurationInHours: formData?.cleaningDurationInHours,
@@ -210,7 +209,13 @@ const Services = ({ onSubmit }) => {
                             }`}
                             htmlFor={item.subscriptionFrequency}
                           >
-                            {item.subscriptionFrequency}
+                            {item.subscriptionFrequency === "EveryTwoWeeks"
+                              ? " Every Two Weeks"
+                              : item.subscriptionFrequency === "EveryWeek"
+                              ? "Every Week"
+                              : item.subscriptionFrequency === "EveryFourWeeks"
+                              ? "Every Four Weeks"
+                              : "One Time Only"}
                           </p>
                           <span className="text-sm">
                             {item.subscriptionPrice * 2} kr/h{" "}
@@ -300,8 +305,3 @@ function InfoIcon(props) {
 }
 
 export default Services;
-
-
-
-
-
