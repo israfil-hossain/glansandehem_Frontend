@@ -130,5 +130,6 @@
   "oldPassword": "Old Password", 
   "newPassword": "New Password", 
   "retype": "Retype New Password",
-  "welcome": "Welcome To"
+  "welcome": "Welcome To",
+  "nextSchedule": "Your Next Schedule Date is  :"
 }

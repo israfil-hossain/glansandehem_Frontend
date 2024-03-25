@@ -124,5 +124,6 @@
   "oldPassword": "Gammalt lösenord", 
   "newPassword": "Nytt lösenord", 
   "retype": "Skriv nytt lösenord igen",
-  "welcome": "Välkommen till"
+  "welcome": "Välkommen till", 
+  "nextSchedule": "Ditt nästa schemadatum är :"
 }

@@ -17,14 +17,14 @@ const Profile = () => {
   const { userData } = useAuthUserContext();
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const {
     data: userSubscriptionData = {},
     isLoading: userSubscriptionLoading,
   } = useQuery([API.GetCleaningUserSubscription]);
 
-  console.log({userSubscriptionData})
+  // console.log({ userSubscriptionData });
 
   // const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
   //   API.GetAllCleaningBooking + `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
@@ -34,18 +34,23 @@ const Profile = () => {
     return <CommonProgress />;
   }
 
-  let nextSchedule = userSubscriptionData?.data?.nextScheduleDate; 
-  console.log({nextSchedule})
+
+  // console.log({ nextSchedule });
 
   return (
     <div className="container h-full overflow-y-hidden">
       <h2 className="lg:text-3xl font-semibold text-secondprimary">
         👋{t("hi")}, {userData?.fullName}
       </h2>
-      <div className="flex w-full justify-center pt-5">
+      <div className="flex w-full justify-center pt-5 space-x-5">
         <div className="rouded-xl flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
           {t("welcome")} Glänsande hem
         </div>
+        {userSubscriptionData?.data?.nextScheduleDate && (
+          <div className="rouded-xl flex w-96 justify-center bg-pink-100 px-4 py-2 text-center">
+            {t("nextSchedule")} {userSubscriptionData?.data?.nextScheduleDate || "N/A"}
+          </div>
+        )}
       </div>
 
       <div className="mt-5 h-full  flex w-full flex-col  lg:flex-row gap-5 justify-center items-center lg:items-start">
@@ -86,7 +91,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-full  h-full">
-          <ProfileCard data={userSubscriptionData?.data}/>
+          <ProfileCard data={userSubscriptionData?.data} />
         </div>
       </div>
       <div>
