@@ -90,7 +90,7 @@ const Profile = () => {
           <div className="rouded-xl flex w-96 justify-center px-4 py-4 text-center  flex-col">
             <p className="bg-secondprimary text-white py-2 my-2 px-4">
               {t("nextSchedule")}{" "}
-              {userSubscriptionData?.data?.nextScheduleDate || "N/A"}
+              {formatDateString(userSubscriptionData?.data?.nextScheduleDate) || "N/A"}
             </p>
             <div className="flex bg-indigo-100 px-2 py-2 items-center justify-between space-x-2 font-semibold">
               <h2 className="text-[12px] ">{t("doyouwant")} </h2>
