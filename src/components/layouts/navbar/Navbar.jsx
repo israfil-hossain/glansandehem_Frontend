@@ -5,6 +5,7 @@ import { FaBell, FaUser, FaUserAlt } from "react-icons/fa";
 
 //Internal import .................
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import MobileNav from "./MobileNav";
 import LenguageSelector from "./LanguageSelector";
 import { useTranslation } from "react-i18next";
@@ -16,21 +17,23 @@ import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { userFound } = useAuthUserContext();
   const queryClient = useQueryClient();
   const handleUserLogout = () => {
     removeTokens();
     queryClient.resetQueries();
-    navigate("/");
+    navigate("https://glansandehem.se");
   };
 
   return (
     <header className="w-full">
       <nav className="container  flex h-20  items-center justify-between bg-white  ">
         <div className="flex flex-row gap-x-4 space-x-5">
-          {/* <Link href={`/${lang}`}> */}
           <div className="flex space-x-2 justify-center items-center">
-            <img src={logo} alt="shorlogo" className="w-36 h-12" />
+            <Link to="https://glansandehem.se">
+              <img src={logo} alt="shorlogo" className="w-36 h-12" />
+            </Link>
             {/* <p className="lg:text-2xl  font-bold  text-secondprimary ">
               Glansan<span className="text-tertiary">dehem</span>
             </p> */}
@@ -43,7 +46,7 @@ const Navbar = () => {
           ) : (
             <ul className="hidden items-center justify-center gap-x-8 lg:flex">
               <li>
-                <Link to={"/"}>{t("navigation.home")}</Link>
+                <Link to="https://glansandehem.se">{t("navigation.home")}</Link>
               </li>
             </ul>
           )}

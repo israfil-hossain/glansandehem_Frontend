@@ -34,10 +34,10 @@ const App = () => {
           exact: true,
           element: <ForgotPassword />,
         },
-        {
-          path: "/reset-password/:id",
-          element: <ResetPassword />,
-        },
+        // {
+        //   path: "/reset-password/:id",
+        //   element: <ResetPassword />,
+        // },
         
 
         //auth

@@ -125,5 +125,6 @@
   "newPassword": "Nytt lösenord", 
   "retype": "Skriv nytt lösenord igen",
   "welcome": "Välkommen till", 
-  "nextSchedule": "Ditt nästa schemadatum är :"
+  "nextSchedule": "Ditt nästa schemadatum är :",
+  "doyouwant": "Vill du avbryta din nästa tjänst ?"
 }

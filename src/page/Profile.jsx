@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { earningHeadings } from "@/constants/TableColumns/earningHeadings";
 import { CommonProgress } from "@/components/common/CommonProgress";
 import { useTranslation } from "react-i18next";
+import usePatch from "@/hooks/usePatch";
 
 const Profile = () => {
   const { userData } = useAuthUserContext();
@@ -22,18 +23,39 @@ const Profile = () => {
   const {
     data: userSubscriptionData = {},
     isLoading: userSubscriptionLoading,
+    refetch
   } = useQuery([API.GetCleaningUserSubscription]);
 
-  console.log({ userSubscriptionData });
+ 
 
   const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
-    API.GetAllCleaningBooking + `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
+    API.GetAllCleaningBooking +
+      `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
   ]);
 
-  if (userSubscriptionLoading) {
+  // Update Mutation ....
+  const { mutateAsync: updateMutate, isLoading: updateLoading } = usePatch({
+    endpoint:
+      API.UpdateCleaningSUbscription + `${userSubscriptionData?.data?._id}`, // Replace with your actual API endpoint
+    onSuccess: (data) => {
+      toast.success("Cancel Your Next Schedule Successfully !");
+      refetch();
+    },
+    onError: (error) => {
+      // Handle update error, e.g., display an error message
+      toast.error(error?.response?.data?.message);
+    },
+  });
+
+  if (userSubscriptionLoading || updateLoading) {
     return <CommonProgress />;
   }
 
+  const handleCancel = async () => {
+    if (userSubscriptionData?.data?.nextScheduleDate) {
+      await updateMutate(userSubscriptionData?.data?.nextScheduleDate);
+    }
+  };
 
   // console.log({ nextSchedule });
 
@@ -42,19 +64,12 @@ const Profile = () => {
       <h2 className="lg:text-3xl font-semibold text-secondprimary">
         👋{t("hi")}, {userData?.fullName}
       </h2>
-      <div className="flex w-full justify-center pt-5 space-x-5">
-        <div className="rouded-xl flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
-          {t("welcome")} Glänsande hem
-        </div>
-        {userSubscriptionData?.data?.nextScheduleDate && (
-          <div className="rouded-xl flex w-96 justify-center bg-pink-100 px-4 py-2 text-center">
-            {t("nextSchedule")} {userSubscriptionData?.data?.nextScheduleDate || "N/A"}
-          </div>
-        )}
-      </div>
 
       <div className="mt-5 h-full  flex w-full flex-col  lg:flex-row gap-5 justify-center items-center lg:items-start">
         <div className="w-full border border-primary overflow-hidden items-center lg:items-start rounded-xl  px-5 py-5  shadow-lg lg:w-[45%]">
+          <div className="rouded-xl flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
+            {t("welcome")} Glänsande hem
+          </div>
           <div className="flex items-center justify-center ">
             <img
               src={userData?.profilePicture || profile}
@@ -71,24 +86,29 @@ const Profile = () => {
             title={t("dateofjoin")}
             value={formatDateString(userData?.dateJoined)}
           />
+          {userSubscriptionData?.data?.nextScheduleDate && (
+          <div className="rouded-xl flex w-96 justify-center px-4 py-4 text-center  flex-col">
+            <p className="bg-secondprimary text-white py-2 my-2 px-4">
+              {t("nextSchedule")}{" "}
+              {userSubscriptionData?.data?.nextScheduleDate || "N/A"}
+            </p>
+            <div className="flex bg-indigo-100 px-2 py-2 items-center justify-between space-x-2 font-semibold">
+              <h2 className="text-[12px] ">{t("doyouwant")} </h2>
+              <button
+                className="w-16 h-8 bg-black text-white text-[12px]"
+                onClick={handleCancel}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+           )} 
           <Link to="/profile-setting">
             <div className="flex justify-center items-center  bg-primary text-white rounded-md py-2 px-4 ">
               {" "}
               <FaEdit size={22} className="text-white mr-4" /> Profile Setting
             </div>
           </Link>
-          <div className="flex flex-col items-center justify-center space-y-4">
-            {/* <h2 className='text-lg font-bold '>Support</h2>
-            <textarea
-              name='support'
-              className='min-h-20 w-full border p-4'
-              placeholder='Write description ... '
-            />
-            <div className='flex w-24 cursor-pointer space-x-3 rounded-full bg-blue-800 px-4 py-2 text-white hover:bg-blue-700'>
-              {' '}
-              <SendIcon /> <p>Send</p>
-            </div> */}
-          </div>
         </div>
         <div className="w-full  h-full">
           <ProfileCard data={userSubscriptionData?.data} />

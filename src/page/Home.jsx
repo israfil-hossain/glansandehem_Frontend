@@ -71,7 +71,6 @@ const Home = () => {
       navigate("/login");
     },
     onError: (error) => {
-     
       toast.error(error?.response?.data?.message ?? "Something went Wrong !");
     },
   });

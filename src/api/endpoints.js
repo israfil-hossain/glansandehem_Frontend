@@ -24,6 +24,7 @@ export const API = {
   GetCleaningUserSubscription: "/api/CleaningSubscription/GetUserSubscription", //get
   GetAllSubscriptionType: "/api/CleaningSubscription/GetAllSubscriptionTypes", //get
   GetAllCleaningBooking: "/api/CleaningBooking/GetAllPaidBooking",//get
+  UpdateCleaningSUbscription: '/api/CleaningSubscription/UpdateSubscriptionById/',
 
   // Cleaning Prices
   PostCleaningPrice: "/api/CleaningPrice/Create", // post
