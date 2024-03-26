@@ -132,5 +132,9 @@
   "retype": "Retype New Password",
   "welcome": "Welcome To",
   "nextSchedule": "Your Next Schedule Date is  :",
-  "doyouwant": "Do you want to Cancel your Next Service ?"
+  "doyouwant": "Do you want to Cancel your Next Service ?", 
+  "everytwoweeks": "Every Two Week", 
+  "everyweek": "Every Week", 
+  "everyfourweek": "Every Four Week",
+  "onetime": "One Time Only"
 }

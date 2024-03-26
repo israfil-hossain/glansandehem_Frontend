@@ -126,5 +126,10 @@
   "retype": "Skriv nytt lösenord igen",
   "welcome": "Välkommen till", 
   "nextSchedule": "Ditt nästa schemadatum är :",
-  "doyouwant": "Vill du avbryta din nästa tjänst ?"
+  "doyouwant": "Vill du avbryta din nästa tjänst ?",
+
+  "everytwoweeks": "Varannan vecka", 
+  "everyweek": "Varje vecka", 
+  "everyfourweek": "Var fjärde vecka",
+  "onetime": "Endast en gång"
 }
