@@ -19,7 +19,6 @@ import { Progress } from "../common/Progress";
 
 export default function DateTime({ onSubmit, prevStep }) {
   const { formData, setFormData } = useFormData();
-  const [postalCode, setPostalCode] = useState(formData?.postalCode);
   const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
@@ -62,17 +61,18 @@ export default function DateTime({ onSubmit, prevStep }) {
   };
 
   const handleSubmit = async (values) => {
-    if (!formData.address || !formData.startDate || !postalCode) {
+    if ( !formData.startDate) {
       setError(
         "Please fill in the required fields: Address, Postal Code, or Date & Time"
       );
       return;
     }
+    // console.log("values", values)
 
     setFormData((prev) => ({
       ...prev,
-      ...values,
-      postalCode: postalCode,
+      postalCode: values?.postalCode,
+      address: values?.address,
 
     }));
     onSubmit();
@@ -82,8 +82,8 @@ export default function DateTime({ onSubmit, prevStep }) {
     <>
       <Formik
         initialValues={{
-          address: "",
-          postalCode: null,
+          address: formData?.postalCode || "",
+          postalCode: formData?.postalCode || null,
         }}
         validationSchema={dateTimeValidation}
         onSubmit={handleSubmit}
@@ -194,7 +194,7 @@ export default function DateTime({ onSubmit, prevStep }) {
                 {error && (
                   <div className="flex items-center rounded-lg bg-red-100 p-4 text-red-700">
                     <FrownIcon className="mr-2 text-red-500" />
-                    <p>{"Please Fillup Required Filled  "}</p>
+                    <p>{error}</p>
                   </div>
                 )}
               </div>

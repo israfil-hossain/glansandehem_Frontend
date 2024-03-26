@@ -24,11 +24,11 @@ const Profile = () => {
     isLoading: userSubscriptionLoading,
   } = useQuery([API.GetCleaningUserSubscription]);
 
-  // console.log({ userSubscriptionData });
+  console.log({ userSubscriptionData });
 
-  // const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
-  //   API.GetAllCleaningBooking + `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
-  // ]);
+  const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
+    API.GetAllCleaningBooking + `?Page=${page}&PageSize=${size}&BookingUserId=${userData?._id}`,
+  ]);
 
   if (userSubscriptionLoading) {
     return <CommonProgress />;
@@ -94,9 +94,9 @@ const Profile = () => {
           <ProfileCard data={userSubscriptionData?.data} />
         </div>
       </div>
-      <div>
-        {/* Booking History */}
-        {/* <DefaultTable
+      <div className="mt-7 ">
+        <h1 className="py-4 text-lg font-semibold">Booking History</h1>
+        <DefaultTable
           isLoading={bookingLoading}
           headings={earningHeadings}
           data={bookingData || []}
@@ -105,7 +105,7 @@ const Profile = () => {
           setSize={setSize}
           page={page}
           setPage={setPage}
-        /> */}
+        />
       </div>
     </div>
   );
