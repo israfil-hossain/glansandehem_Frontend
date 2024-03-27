@@ -271,19 +271,19 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
               <label className="text-sm font-medium" htmlFor="terms">
                 {/* {t("address_.accept")} */}I accept{" "}
                 <Link
-                  to="https://Glänsande hem.se/terms-conditions/"
+                  to="https://glansandehem.se/terms-conditions/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="font-semibold text-sm">Terms</span>
+                  <span className="font-semibold text-sm underline">Terms</span>
                 </Link>{" "}
                 and{" "}
                 <Link
-                  to="https://Glänsande hem.se/privacy_policy/"
+                  to="https://glansandehem.se/privacy_policy/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="font-semibold text-sm">Policy</span>
+                  <span className="font-semibold text-sm underline">Policy</span>
                 </Link>
               </label>
             </div>

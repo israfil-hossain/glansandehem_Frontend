@@ -13,6 +13,7 @@ import { earningHeadings } from "@/constants/TableColumns/earningHeadings";
 import { CommonProgress } from "@/components/common/CommonProgress";
 import { useTranslation } from "react-i18next";
 import usePatch from "@/hooks/usePatch";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { userData } = useAuthUserContext();
@@ -23,10 +24,8 @@ const Profile = () => {
   const {
     data: userSubscriptionData = {},
     isLoading: userSubscriptionLoading,
-    refetch
+    refetch,
   } = useQuery([API.GetCleaningUserSubscription]);
-
- 
 
   const { data: bookingData = {}, isLoading: bookingLoading } = useQuery([
     API.GetAllCleaningBooking +
@@ -51,13 +50,49 @@ const Profile = () => {
     return <CommonProgress />;
   }
 
-  const handleCancel = async () => {
-    if (userSubscriptionData?.data?.nextScheduleDate) {
-      await updateMutate(userSubscriptionData?.data?.nextScheduleDate);
+  const getNextSchedule = async () => {
+    if (!userSubscriptionData || !userSubscriptionData.data) {
+      throw new Error("Missing or invalid subscription data");
     }
+
+    const frequency = userSubscriptionData.data.subscriptionFrequency;
+    const nextSchedule = new Date(userSubscriptionData.data.nextScheduleDate); // Convert to Date object
+
+    let nextScheduleDate;
+    switch (frequency) {
+      case "EveryWeek":
+        nextScheduleDate = new Date(
+          nextSchedule.setDate(nextSchedule.getDate() + 7)
+        );
+        break;
+      case "EveryTwoWeeks":
+        nextScheduleDate = new Date(
+          nextSchedule.setDate(nextSchedule.getDate() + 14)
+        );
+        break;
+      case "EveryFourWeeks":
+        nextScheduleDate = new Date(
+          nextSchedule.setMonth(nextSchedule.getMonth() + 1)
+        ); // Handle month overflow
+        break;
+      default:
+        console.warn(`Unsupported frequency: ${frequency}`);
+        return null; // Or handle unsupported frequency differently
+    }
+
+    return nextScheduleDate.toISOString(); // Convert back to ISO string if needed
   };
 
-  // console.log({ nextSchedule });
+  const handleCancel = async () => {
+    if (userSubscriptionData?.data?.nextScheduleDate) {
+      const nextScheduleDateCalculate = await getNextSchedule();
+      const payload = {
+        nextScheduleDate: nextScheduleDateCalculate,
+      };
+
+      await updateMutate(payload);
+    }
+  };
 
   return (
     <div className="container h-full overflow-y-hidden">
@@ -67,8 +102,8 @@ const Profile = () => {
 
       <div className="mt-5 h-full  flex w-full flex-col  lg:flex-row gap-5 justify-center items-center lg:items-start">
         <div className="w-full border border-primary overflow-hidden items-center lg:items-start rounded-xl  px-5 py-5  shadow-lg lg:w-[45%]">
-          <div className="rouded-xl flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
-            {t("welcome")} Glänsande hem
+          <div className="rouded-xl mb-3 flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
+            {t("welcome")} Glänsande Hem
           </div>
           <div className="flex items-center justify-center ">
             <img
@@ -87,22 +122,24 @@ const Profile = () => {
             value={formatDateString(userData?.dateJoined)}
           />
           {userSubscriptionData?.data?.nextScheduleDate && (
-          <div className="rouded-xl flex w-96 justify-center px-4 py-4 text-center  flex-col">
-            <p className="bg-secondprimary text-white py-2 my-2 px-4">
-              {t("nextSchedule")}{" "}
-              {formatDateString(userSubscriptionData?.data?.nextScheduleDate) || "N/A"}
-            </p>
-            <div className="flex bg-indigo-100 px-2 py-2 items-center justify-between space-x-2 font-semibold">
-              <h2 className="text-[12px] ">{t("doyouwant")} </h2>
-              <button
-                className="w-16 h-8 bg-black text-white text-[12px]"
-                onClick={handleCancel}
-              >
-                Yes
-              </button>
+            <div className="rouded-xl flex w-96 justify-center px-4 py-4 text-center  flex-col">
+              <p className="bg-secondprimary text-white py-2 my-2 px-4">
+                {t("nextSchedule")}{" "}
+                {formatDateString(
+                  userSubscriptionData?.data?.nextScheduleDate
+                ) || "N/A"}
+              </p>
+              <div className="flex lg:flex-row flex-col space-y-2  bg-indigo-100 px-2 py-2 items-center justify-between space-x-2 font-semibold">
+                <h2 className="text-[12px] ">{t("doyouwant")} </h2>
+                <button
+                  className="w-16 h-8 bg-black text-white text-[12px]"
+                  onClick={handleCancel}
+                >
+                  Yes
+                </button>
+              </div>
             </div>
-          </div>
-           )} 
+          )}
           <Link to="/profile-setting">
             <div className="flex justify-center items-center  bg-primary text-white rounded-md py-2 px-4 ">
               {" "}

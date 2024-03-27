@@ -209,13 +209,14 @@ const Services = ({ onSubmit }) => {
                             }`}
                             htmlFor={item.subscriptionFrequency}
                           >
-                            {item.subscriptionFrequency === "EveryTwoWeeks"
-                              ? `${t("everytwoweeks")}`
-                              : item.subscriptionFrequency === "EveryWeek"
+                            {item.subscriptionFrequency === "EveryWeek"
                               ? `${t("everyweek")}`
+                              : item.subscriptionFrequency === "EveryTwoWeeks"
+                              ? `${t("everytwoweeks")}`
                               : item.subscriptionFrequency === "EveryFourWeeks"
                               ? `${t("everyfourweek")}`
                               : `${t("onetime")}`}
+                           
                           </p>
                           <span className="text-sm">
                             {item.subscriptionPrice * 2} kr/h{" "}
