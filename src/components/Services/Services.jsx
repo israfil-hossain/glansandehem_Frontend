@@ -30,6 +30,19 @@ const Services = ({ onSubmit }) => {
     onSubmit();
   };
 
+
+  const sortFrequencies = (frequencies) => {
+    // Implement your sorting logic here
+    // Example: sort by subscription frequency (EveryWeek, EveryTwoWeeks, EveryFourWeeks, onetime)
+    return frequencies.sort((a, b) => {
+      const order = ["EveryWeek", "EveryTwoWeeks", "EveryFourWeeks", "OneTimeOnly"];
+      return order.indexOf(a.subscriptionFrequency) - order.indexOf(b.subscriptionFrequency);
+    });
+  };
+
+  const sortedData = sortFrequencies(cleaningFrequency?.data || []);
+
+  
   return (
     <div className="lg:w-md w-full rounded-lg  bg-white py-4 shadow-lg lg:mx-auto lg:px-12">
       <h2 className={`text-center text-[35px] font-[700] text-secondprimary`}>
@@ -167,10 +180,10 @@ const Services = ({ onSubmit }) => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {cleaningFrequency?.data?.map((item, i) => (
+                  {sortedData.map((item, i) => (
                     <div
                       key={i}
-                      className={`bg-gray-100  items-center  cursor-pointer   rounded-lg  overflow-hidden ${
+                      className={`bg-gray-100 items-center cursor-pointer rounded-lg overflow-hidden ${
                         values?.cleaningFrequency ===
                         item?.subscriptionFrequency
                           ? "border-2 border-black"
@@ -182,7 +195,6 @@ const Services = ({ onSubmit }) => {
                           item?.subscriptionFrequency
                         );
                         await setFieldValue("cleaningPrice", item?._id);
-
                         await setFormData((prevFormData) => ({
                           ...prevFormData,
                           cleaningFrequency: item?.subscriptionFrequency,
@@ -191,8 +203,8 @@ const Services = ({ onSubmit }) => {
                       }}
                     >
                       {item?.subscriptionFrequency === "EveryTwoWeeks" && (
-                        <div className="flex items-end justify-end  ">
-                          <p className="  rounded-bl-full rounded-tl-sm rounded-tr-48 mr-[0.2px]   bg-secondprimary px-4 py-1 text-center text-[12px] font-bold text-white">
+                        <div className="flex items-end justify-end">
+                          <p className="rounded-bl-full rounded-tl-sm rounded-tr-48 mr-[0.2px] bg-secondprimary px-4 py-1 text-center text-[12px] font-bold text-white">
                             {t("service.mostpopular")}
                           </p>
                         </div>
@@ -209,14 +221,18 @@ const Services = ({ onSubmit }) => {
                             }`}
                             htmlFor={item.subscriptionFrequency}
                           >
-                            {item.subscriptionFrequency === "EveryWeek"
-                              ? `${t("everyweek")}`
-                              : item.subscriptionFrequency === "EveryTwoWeeks"
-                              ? `${t("everytwoweeks")}`
-                              : item.subscriptionFrequency === "EveryFourWeeks"
-                              ? `${t("everyfourweek")}`
-                              : `${t("onetime")}`}
-                           
+                            {(() => {
+                              switch (item.subscriptionFrequency) {
+                                case "EveryWeek":
+                                  return `${t("everyweek")}`;
+                                case "EveryTwoWeeks":
+                                  return `${t("everytwoweeks")}`;
+                                case "EveryFourWeeks":
+                                  return `${t("everyfourweek")}`;
+                                default:
+                                  return `${t("onetime")}`;
+                              }
+                            })()}
                           </p>
                           <span className="text-sm">
                             {item.subscriptionPrice * 2} kr/h{" "}
