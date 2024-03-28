@@ -66,7 +66,7 @@ const Duration = (size) => {
 
 
 const phoneNumber = "+46761525840"; // Replace with your desired phone number
-const message  = "Hello, WelCome to Glänsande hem.  let's chat!";
+const message  = "Hej, jag har en fråga om att göra en bokning";
 
 export const generateWhatsAppLink = () => {
   const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
