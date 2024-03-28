@@ -48,7 +48,7 @@ const Item = ({
         id={answerID}
         aria-labelledby={questionID}
         className={`transition-all duration-500 ease-in-out h-full ${
-          isActive ? "max-h-[300px] opacity-100" : "max-h-[0px] opacity-0"
+          isActive ? "h-full opacity-100" : "max-h-[0px] opacity-0"
         }`}
       >
         <p className="text-gray-500 p-5">{answer}</p>
