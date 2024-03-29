@@ -82,7 +82,7 @@ export default function DateTime({ onSubmit, prevStep }) {
     <>
       <Formik
         initialValues={{
-          address: formData?.postalCode || "",
+          address: "",
           postalCode: formData?.postalCode || null,
         }}
         validationSchema={dateTimeValidation}

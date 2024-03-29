@@ -12,7 +12,10 @@ const addressValidation = yup.object().shape({
     userPhoneNumber: yup
     .string()
     .required("Phone Number is required!")
-    .matches(/^\d{11}$/, "Phone Number must be exactly 11 digits long!"),
+    .matches(/^\d+$/, "Phone Number must contain only digits!")
+    .min(10, "Phone Number must be at least 10 digits long!")
+    .max(12, "Phone Number must be at most 12 digits long!"),
+   
     
   });
   

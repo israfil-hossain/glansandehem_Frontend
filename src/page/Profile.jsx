@@ -95,14 +95,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="container h-full overflow-y-hidden">
+    <div className="lg:container px-4 h-full overflow-y-hidden">
       <h2 className="lg:text-3xl font-semibold text-secondprimary">
         👋{t("hi")}, {userData?.fullName}
       </h2>
 
       <div className="mt-5 h-full  flex w-full flex-col  lg:flex-row gap-5 justify-center items-center lg:items-start">
-        <div className="w-full border border-primary overflow-hidden items-center lg:items-start rounded-xl  px-5 py-5  shadow-lg lg:w-[45%]">
-          <div className="rouded-xl mb-3 flex w-96 justify-center bg-indigo-50 px-4 py-2 text-center">
+        <div className="w-full border border-primary overflow-hidden items-center lg:items-start rounded-xl  py-5 px-3 shadow-lg lg:w-[45%]">
+          <div className="rouded-xl mb-3 items-center flex justify-center bg-indigo-50 mx-2 py-2 text-center">
             {t("welcome")} Glänsande Hem
           </div>
           <div className="flex items-center justify-center ">
@@ -122,13 +122,15 @@ const Profile = () => {
             value={formatDateString(userData?.dateJoined)}
           />
           {userSubscriptionData?.data?.nextScheduleDate && (
-            <div className="rouded-xl flex w-96 justify-center px-4 py-4 text-center  flex-col">
-              <p className="bg-secondprimary text-white py-2 my-2 px-4">
-                {t("nextSchedule")}{" "}
+            <div className="rouded-xl flex  justify-center px-4 py-4 text-center  flex-col">
+              <div className="bg-secondprimary text-white py-2 my-2 px-4 lg:flex flex-col gap-3">
+                <p>{t("nextSchedule")}{" "}</p>
+                <p>
                 {formatDateString(
                   userSubscriptionData?.data?.nextScheduleDate
                 ) || "N/A"}
-              </p>
+                </p>
+              </div>
               <div className="flex lg:flex-row flex-col space-y-2  bg-indigo-100 px-2 py-2 items-center justify-between space-x-2 font-semibold">
                 <h2 className="text-[12px] ">{t("doyouwant")} </h2>
                 <button

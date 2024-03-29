@@ -124,8 +124,15 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Check for window object (important for server-side rendering)
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
+    }
+  }, [step]);
+
   return (
-    <div className="container mb-10 flex overflow-hidden   flex-col lg:flex-row lg:space-x-5">
+    <div className="inset-0 container mb-10 flex overflow-hidden   flex-col lg:flex-row lg:space-x-5">
       <div className=" mx-0 mb-10  w-[100%] rounded-xl lg:mx-auto overflow-y-auto  lg:w-[55%] ">
         <div className="container mt-5">
           <Stepper currentStep={step} steps={steps} />
@@ -152,15 +159,18 @@ const Home = () => {
               </div>
             </div>
             <hr />
-            <div className="border-gray-200 lg:flex flex-col  justify-between  py-4">
-              <div className="flex items-center space-x-3">
-                <CheckIcon className="h-5 w-5 text-green-500" />
-                <p>{t("frequency")}: </p>
-                <span className="text-gray-700 text-sm font-medium uppercase">
+            <div className="border-gray-200 lg:flex flex-col  justify-between  py-4 mb-1">
+              <div className="lg:flex flex-col space-y-2 items-center space-x-3 mb-2">
+                <div className="flex">
+                  <CheckIcon className="h-5 w-5 text-green-500" />
+                  <p>{t("frequency")}: </p>
+                </div>
+                <div><span className="text-gray-700 text-sm font-medium uppercase">
                   {formData?.cleaningFrequency || "N/A"}
                 </span>
+                </div>
               </div>
-              <div className="flex space-x-3 items-center">
+              <div className="flex  space-y-2 space-x-3 items-center">
                 <div className="flex space-x-3 gap-3 items-center ">
                   <CheckIcon className="h-5 w-5 text-green-500" />
                   {t("cleaning_duration")} :{" "}
@@ -170,7 +180,7 @@ const Home = () => {
                 </span>
               </div>
             </div>
-            <div className="flex justify-between py-4">
+            <div className="lg:flex space-y-2 flex-col justify-between py-4">
               <div className="flex items-center space-x-1">
                 <LocateIcon className="text-gray-700 h-5 w-5" />
                 <span className="text-gray-700 text-sm font-medium">
@@ -246,13 +256,11 @@ const Home = () => {
               </div>
             </div>
           </CardContent>
-          
         </Card>
-        <div className="w-full mt-5"><AccordionSection /></div>
-
-        
+        <div className="w-full mt-5">
+          <AccordionSection />
+        </div>
       </div>
-      
     </div>
   );
 };

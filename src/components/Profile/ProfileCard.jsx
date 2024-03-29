@@ -118,7 +118,7 @@ const ProfileCard = ({data}) => {
                 {data?.cleaningDurationInHours} Hours
               </h2>
               <h2 className="mb-3 lg:text-lg text-[12px] font-semibold text-blue-900">
-                {formatDatewithTime(data?.startDate)}
+                {formatDatewithTime(data?.currentBooking?.cleaningDate)}
               </h2>
             </div>
           </div>
@@ -169,14 +169,14 @@ const ProfileCard = ({data}) => {
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">{t("serviceFee")}</span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.cleaningPrice?.subscriptionPrice || "N/A"}{" "}
+                {data?.subscriptionPrice || "N/A"}{" "}
                 kr
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">
-                {t("cleaning")}{" "}
-                {data?.cleaningPrice?.subscriptionPrice}{" "}
+                {t("cleaning")}{""} {"Price"}
+                {data?.subscriptionPrice}{" "}
                 kr/h x {data?.cleaningDurationInHours || "N/A"} h
               </span>
               <span className="text-gray-900 text-sm font-medium">
@@ -184,9 +184,9 @@ const ProfileCard = ({data}) => {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-700 text-sm">{t("discount")} </span>
+              <span className="text-gray-700 text-sm">{t("discount")} %</span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.currentBooking?.discountAmount || "N/A"} kr
+                {data?.currentBooking?.discountAmount || "N/A"} Kr
               </span>
             </div>
             <div className="flex justify-between py-2">
@@ -213,6 +213,13 @@ const ProfileCard = ({data}) => {
               </span>
               <span className="text-grey-900 text-sm font-medium">
                 {data?.currentBooking?.remarks}{" "}
+              </span>
+            </div>
+          
+            <div className="flex justify-between pt-2">
+              <span className="text-gray-800 text-lg font-bold">{t("service.before_rut")}</span>
+              <span className="text-2xl font-bold text-blue-800">
+                {data?.currentBooking?.cleaningPrice * 2 + data?.currentBooking?.additionalCharges + data?.currentBooking?.suppliesCharges} kr
               </span>
             </div>
 
@@ -257,6 +264,8 @@ const ProfileCard = ({data}) => {
                 </div>
               </div>
             )}
+
+            <p className="text-center w-full font-semibold py-2">Org. No. 890114-4751</p>
           </div>
         </div>
       </CardContent>
