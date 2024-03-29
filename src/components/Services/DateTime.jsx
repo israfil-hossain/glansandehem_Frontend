@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useMemo } from "react";
 import { isValid } from "swedish-postal-code-validator";
 import { ChevronsUpDown } from "lucide-react";
 import { FrownIcon } from "../common/Icons/Icons";
@@ -28,6 +28,7 @@ export default function DateTime({ onSubmit, prevStep }) {
     dogs: false,
     otherPets: false,
   });
+
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -82,8 +83,8 @@ export default function DateTime({ onSubmit, prevStep }) {
     <>
       <Formik
         initialValues={{
-          address: "",
-          postalCode: formData?.postalCode || null,
+          address: formData?.address || "",
+          postalCode:  null,
         }}
         validationSchema={dateTimeValidation}
         onSubmit={handleSubmit}
@@ -96,8 +97,20 @@ export default function DateTime({ onSubmit, prevStep }) {
           isSubmitting,
           handleSubmit,
           setFieldValue,
-        }) => (
-          <Form>
+        }) => {
+          const filteredOptions = useMemo(() => {
+            if (!values.postalCode) return postalCodeData;
+          
+            const postalCodeString = String(values.postalCode);
+          
+            return postalCodeData.filter((option) =>
+              option.label.toLowerCase().startsWith(postalCodeString.toLowerCase())
+            );
+          }, [values.postalCode]);
+          
+
+          return (
+            <Form>
             {/* <>{JSON.stringify(values)}</> */}
             <div className="w-full rounded-xl bg-white py-5 shadow-lg lg:px-12">
               <h2 className="mb-6 text-center lg:text-[40px] text-[25px] font-semibold">
@@ -143,11 +156,15 @@ export default function DateTime({ onSubmit, prevStep }) {
                     fullWidth
                     label="Postal Code"
                     component={Autocomplete}
-                    options={postalCodeData} // Use imported data
-                    getOptionLabel={(option) => option.label || option.value} // Assuming your options have label or value property
+                    options={filteredOptions}  // Use imported data
+                    getOptionLabel={(option) => option.label} // Assuming your options have label or value property
+                    filterOnChange={false}
+                    disableClearable={false}
                     onChange={(event, newValue) => {
                       if (newValue) {
                         setFieldValue("postalCode", newValue.value);
+                      } else {
+                        setFieldValue("postalCode", ""); // Clear the Formik field value
                       }
                     }}
                     renderInput={(params) => (
@@ -157,6 +174,7 @@ export default function DateTime({ onSubmit, prevStep }) {
                         InputProps={{
                           ...params.InputProps,
                           endAdornment: isLoading ? <Progress /> : null,
+                          type:'search'
                         }}
                       />
                     )}
@@ -225,7 +243,10 @@ export default function DateTime({ onSubmit, prevStep }) {
               </div>
             </div>
           </Form>
-        )}
+          )
+        }
+        
+        }
       </Formik>
     </>
   );
