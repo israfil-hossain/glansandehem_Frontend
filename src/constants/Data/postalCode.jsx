@@ -2251,4 +2251,4 @@ export const postalCodeData = [
 13720,
 13742,
 18520,
-].map(value=>({label: String(value), value}))
+].map((value) => ({ label: String(value), value: String(value) })); // Convert to strings
