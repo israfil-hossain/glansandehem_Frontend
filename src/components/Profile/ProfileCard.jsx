@@ -169,14 +169,14 @@ const ProfileCard = ({data}) => {
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">{t("serviceFee")}</span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.subscriptionPrice || "N/A"}{" "}
+                {data?.currentBooking?.subscriptionPrice || "N/A"}{" "}
                 kr
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">
                 {t("cleaning")}{""} {"Price"}
-                {data?.subscriptionPrice}{" "}
+                {data?.currentBooking?.subscriptionPrice}{" "}
                 kr/h x {data?.cleaningDurationInHours || "N/A"} h
               </span>
               <span className="text-gray-900 text-sm font-medium">
@@ -184,9 +184,9 @@ const ProfileCard = ({data}) => {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-700 text-sm">{t("discount")} %</span>
+              <span className="text-gray-700 text-sm">{t("discount")}</span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.currentBooking?.discountAmount || "N/A"} Kr
+                {data?.currentBooking?.discountAmount || "N/A"} %
               </span>
             </div>
             <div className="flex justify-between py-2">
