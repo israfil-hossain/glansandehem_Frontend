@@ -121,7 +121,7 @@
   "bookingProcessing" : "Booking Processing ...", 
   "paymentPaid": "Payment Paid", 
   "pendingPaid": "Pending Paid", 
-  "serviceTaken": "Service Taken", 
+  "serviceTaken": "Service Charge per hour", 
   "cleaningTime": "Cleaning Time", 
   "hi": "HI", 
   "dateofjoin": "Date of Join", 
