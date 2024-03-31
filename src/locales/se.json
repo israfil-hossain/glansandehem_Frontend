@@ -57,7 +57,7 @@
   "payment": "BETALNING",
   "postalCode": "postnummer",
   "havePets": "Ha husdjur",
-  "serviceFee": "Serviceavgifter",
+  "serviceFee": "Serviceavgift per timme",
   "discount" : "Rea-pris",
   "overview": "Översikt",
   "cleaning": "Rengöring",

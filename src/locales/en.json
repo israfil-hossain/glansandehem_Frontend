@@ -63,7 +63,7 @@
   "payment": "PAYMENT",
   "postalCode": "Postal Code",
   "havePets": "Have Pets",
-  "serviceFee": "Service Fees",
+  "serviceFee": "Service Charge Per Hour",
   "discount" : "Discount Price",
   "overview": "OverView",
   "cleaning": "Cleaning",

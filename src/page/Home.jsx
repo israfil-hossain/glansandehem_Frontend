@@ -200,7 +200,7 @@ const Home = () => {
               <div className="rounded-lg bg-slate-100 p-5 ">
                 <div className="flex justify-between">
                   <span className="text-gray-700 text-sm">
-                    {t("cleaning")} {formData?.showPrice} kr/h x{" "}
+                    {t("cleaning")} {"  "} {formData?.showPrice} kr/h x{" "}
                     {formData?.cleaningDurationInHours} h
                   </span>
                   <span className="text-gray-900 text-sm font-medium">
