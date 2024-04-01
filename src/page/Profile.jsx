@@ -35,7 +35,7 @@ const Profile = () => {
   // Update Mutation ....
   const { mutateAsync: updateMutate, isLoading: updateLoading } = usePatch({
     endpoint:
-      API.UpdateCleaningSUbscription + `${userSubscriptionData?.data?._id}`, // Replace with your actual API endpoint
+      API.SkippedUpcomingSubscription + `${userSubscriptionData?.data?._id}`, // Replace with your actual API endpoint
     onSuccess: (data) => {
       toast.success("Cancel Your Next Schedule Successfully !");
       refetch();
@@ -50,47 +50,47 @@ const Profile = () => {
     return <CommonProgress />;
   }
 
-  const getNextSchedule = async () => {
-    if (!userSubscriptionData || !userSubscriptionData.data) {
-      throw new Error("Missing or invalid subscription data");
-    }
+  // const getNextSchedule = async () => {
+  //   if (!userSubscriptionData || !userSubscriptionData.data) {
+  //     throw new Error("Missing or invalid subscription data");
+  //   }
 
-    const frequency = userSubscriptionData.data.subscriptionFrequency;
-    const nextSchedule = new Date(userSubscriptionData.data.nextScheduleDate); // Convert to Date object
+  //   const frequency = userSubscriptionData.data.subscriptionFrequency;
+  //   const nextSchedule = new Date(userSubscriptionData.data.nextScheduleDate); // Convert to Date object
 
-    let nextScheduleDate;
-    switch (frequency) {
-      case "EveryWeek":
-        nextScheduleDate = new Date(
-          nextSchedule.setDate(nextSchedule.getDate() + 7)
-        );
-        break;
-      case "EveryTwoWeeks":
-        nextScheduleDate = new Date(
-          nextSchedule.setDate(nextSchedule.getDate() + 14)
-        );
-        break;
-      case "EveryFourWeeks":
-        nextScheduleDate = new Date(
-          nextSchedule.setMonth(nextSchedule.getMonth() + 1)
-        ); // Handle month overflow
-        break;
-      default:
-        console.warn(`Unsupported frequency: ${frequency}`);
-        return null; // Or handle unsupported frequency differently
-    }
+  //   let nextScheduleDate;
+  //   switch (frequency) {
+  //     case "EveryWeek":
+  //       nextScheduleDate = new Date(
+  //         nextSchedule.setDate(nextSchedule.getDate() + 7)
+  //       );
+  //       break;
+  //     case "EveryTwoWeeks":
+  //       nextScheduleDate = new Date(
+  //         nextSchedule.setDate(nextSchedule.getDate() + 14)
+  //       );
+  //       break;
+  //     case "EveryFourWeeks":
+  //       nextScheduleDate = new Date(
+  //         nextSchedule.setMonth(nextSchedule.getMonth() + 1)
+  //       ); // Handle month overflow
+  //       break;
+  //     default:
+  //       console.warn(`Unsupported frequency: ${frequency}`);
+  //       return null; // Or handle unsupported frequency differently
+  //   }
 
-    return nextScheduleDate.toISOString(); // Convert back to ISO string if needed
-  };
+  //   return nextScheduleDate.toISOString(); // Convert back to ISO string if needed
+  // };
 
   const handleCancel = async () => {
     if (userSubscriptionData?.data?.nextScheduleDate) {
-      const nextScheduleDateCalculate = await getNextSchedule();
-      const payload = {
-        nextScheduleDate: nextScheduleDateCalculate,
-      };
-
-      await updateMutate(payload);
+      // const nextScheduleDateCalculate = await getNextSchedule();
+      // const payload = {
+      //   nextScheduleDate: nextScheduleDateCalculate,
+      // };
+     
+      await updateMutate();
     }
   };
 
