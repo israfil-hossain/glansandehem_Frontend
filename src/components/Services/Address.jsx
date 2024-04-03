@@ -56,6 +56,7 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
     userEmail: "",
     userPidNumber: "",
     userPhoneNumber: "",
+    termsAndConditions: false,
   };
 
   const handleCoupon = async () => {
@@ -267,7 +268,8 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
             </div>
 
             <div className="flex items-center space-x-2 mt-4">
-              <Checkbox id="terms" />
+              {/* <Checkbox id="terms" name="termsAndConditions" value={values?.termsAndConditions}/> */}
+              <Field type="checkbox" name="termsAndConditions" />
               <label className="text-sm font-medium" htmlFor="terms">
                 {/* {t("address_.accept")} */}I accept{" "}
                 <Link
@@ -287,6 +289,11 @@ export default function Address({ prevStep, onSubmit, isLoading }) {
                 </Link>
               </label>
             </div>
+            {touched.termsAndConditions && errors.termsAndConditions && (
+                <p className="mt-2 text-sm text-red-600 ">
+                  {errors.termsAndConditions}
+                </p>
+              )}
 
             <div className="container mb-8 mt-4 flex justify-around">
               {/* back button */}

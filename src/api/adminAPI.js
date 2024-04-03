@@ -49,7 +49,7 @@ adminAPI.interceptors.response.use(undefined, (error) => {
     if (!isRefreshingToken) {
       isRefreshingToken = true;
       axios
-        .post(`${ADMIN_BASE_URL}/api/Auth/TokenRefresh`, {
+        .post(`${ADMIN_BASE_URL}/api/Authentication/TokenRefresh`, {
           refreshToken,
         })
         .then(({ data = {} }) => {

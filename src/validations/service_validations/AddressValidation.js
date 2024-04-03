@@ -15,6 +15,8 @@ const addressValidation = yup.object().shape({
     .matches(/^\d+$/, "Phone Number must contain only digits!")
     .min(10, "Phone Number must be at least 10 digits long!")
     .max(12, "Phone Number must be at most 12 digits long!"),
+    termsAndConditions: yup.boolean()
+    .oneOf([true], "You must accept the Terms and Conditions"),
    
     
   });
