@@ -40,7 +40,6 @@ const Signin = () => {
     signInMutationAsync(payload)
       .then((response) => {
         if (response.data.data) {
-        
           setAccessToken(response.data.data?.accessToken);
           setRefreshToken(response.data.data?.refreshToken);
           toast.success("Successfully login");
@@ -78,7 +77,7 @@ const Signin = () => {
               className="items-center mt-5"
             />
             <p className="text-white leading-12 mt-5 text-3xl items-center text-center">
-              Welcome to 
+              Welcome to
             </p>
             <p className="text-white leading-12 mt-5 text-3xl items-center text-center">
               Glänsande Hem
@@ -212,10 +211,22 @@ const Signin = () => {
       </div>
 
       <div className=" lg:hidden bg-white w-96 border px-6 py-8 mt-5 shadow-md rounded-lg  hover:shadow-lg">
-        <div className="mb-6 ">
-          <h2 className="text-center text-3xl font-extrabold text-gray-900">
+        <div className="">
+          {/* <h2 className="text-center text-3xl font-extrabold text-gray-900">
             Sign In
-          </h2>
+          </h2> */}
+          <div className="flex flex-col items-center mb-10 h-full text-center  justify-center ">
+            <p className="text-primary leading-6 mt-2 text-2xl font-bold items-center text-center">
+              Welcome to Glänsande Hem
+            </p>
+            <img
+              alt="logo"
+              src={logo}
+              width="250px"
+              height="200px "
+              className="items-center mt-5"
+            />
+          </div>
         </div>
         <div>
           <Formik

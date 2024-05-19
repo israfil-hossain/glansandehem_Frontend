@@ -2,6 +2,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 import { months } from "../constants/Data/constantsData";
 import dayjs from "dayjs";
+import Swal from "sweetalert2";
 
 const getCurrentMonth = () => {
   let currentDate = new Date();
@@ -19,6 +20,9 @@ const isLargeScreen = () => {
 
 const formatDateString = (date) => {
   return !!date ? dayjs(date).format("DD MMM, YYYY") : "";
+};
+const formatTime = (date) => {
+  return !!date ? dayjs(date).format("HH:mm") : "";
 };
 
 const formatDatewithTime = (date) => {
@@ -64,6 +68,17 @@ const Duration = (size) => {
   }
 };
 
+const cancelConfirmation = () => {
+  return Swal.fire({
+    title: 'Are you sure You want to Cancel Next Service ?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#9568FF',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, cancel it!'
+  });
+};
 
 const phoneNumber = "+46761525840"; // Replace with your desired phone number
 const message  = "Hej, jag har en fråga om att göra en bokning";
@@ -75,4 +90,4 @@ export const generateWhatsAppLink = () => {
   return url;
 };
 
-export { formatDateString, getCurrentMonth, isLargeScreen,Duration,formatDatewithTime};
+export { cancelConfirmation,formatDateString,formatTime, getCurrentMonth, isLargeScreen,Duration,formatDatewithTime};

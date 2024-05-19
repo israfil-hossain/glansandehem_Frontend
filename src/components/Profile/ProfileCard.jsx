@@ -3,18 +3,23 @@ import { CardTitle, CardHeader, CardContent, Card } from "../ui/card.tsx";
 import { CheckIcon, PawPrintIcon } from "../common/Icons/Icons";
 import { useQuery } from "@tanstack/react-query";
 import { API } from "@/api/endpoints.js";
-import { formatDatewithTime } from "@/utils/CommonFunction.js";
+import {
+  formatDateString,
+  formatDatewithTime,
+  formatTime,
+} from "@/utils/CommonFunction.js";
 import { FaChartArea, FaQrcode } from "react-icons/fa";
 import GridCard from "../common/ui/GridCard.jsx";
 import { CommonProgress } from "../common/CommonProgress.jsx";
 import { useNavigate } from "react-router-dom";
 import adminAPI from "@/api/adminAPI.js";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
-const ProfileCard = ({data}) => {
+const ProfileCard = ({ data }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   // // GetCleaningUserSubscription
   // const {
@@ -22,8 +27,7 @@ const ProfileCard = ({data}) => {
   //   isLoading: userSubscriptionLoading,
   // } = useQuery([API.GetCleaningUserSubscription]);
 
-  const paymentEndpoint =
-    API.PaymentReceive + `${data?.currentBooking?._id}`;
+  const paymentEndpoint = API.PaymentReceive + `${data?.currentBooking?._id}`;
 
   const handlePayment = async () => {
     try {
@@ -44,52 +48,42 @@ const ProfileCard = ({data}) => {
     }
   };
 
-
-
   return (
     <Card className="lg:mx-5 mx-0 w-full rounded-lg bg-white shadow-md">
       <CardHeader>
         <div className="grid lg:grid-cols-2 grid-cols-1 justify-between  flex-col ">
-          <div className="bg-secondprimary text-white py-1 lg:text-lg text-[12px] px-4 w-1/2">
+          <div className="bg-secondprimary text-white py-1 lg:text-lg text-[12px] text-center px-4 lg:w-1/2 w-full">
             {t("servicedetails")}
           </div>
           <div className="flex justify-between lg:mt-0 mt-5  ">
             <div
               className={`${
-                data?.currentBooking?.bookingStatus ===
-                "BookingCancelled"
+                data?.currentBooking?.bookingStatus === "BookingCancelled"
                   ? "bg-red-300"
-                  : data?.currentBooking
-                      ?.bookingStatus === "BookingServed"
+                  : data?.currentBooking?.bookingStatus === "BookingServed"
                   ? "bg-blue-500"
-                  : data?.currentBooking
-                      ?.bookingStatus === "BookingCompleted"
+                  : data?.currentBooking?.bookingStatus === "BookingCompleted"
                   ? "bg-[#0b7911a2]" // Use the intended background color for confirmed bookings
                   : "bg-yellow-500"
               } text-white  px-4 py-1 lg:pt-2 text-center items-center rounded-full lg:text-[14px] text-[11px] `}
             >
-              {data?.currentBooking?.bookingStatus ===
-              "BookingCancelled"
+              {data?.currentBooking?.bookingStatus === "BookingCancelled"
                 ? `${t("bookingCanceled")}`
-                : data?.currentBooking?.bookingStatus ===
-                  "BookingServed"
+                : data?.currentBooking?.bookingStatus === "BookingServed"
                 ? `${t("bookingConfirmed")}`
-                : data?.currentBooking?.bookingStatus ===
-                  "BookingCompleted"
+                : data?.currentBooking?.bookingStatus === "BookingCompleted"
                 ? `${t("bookingComplete")}` // Use the intended background color for confirmed bookings
                 : `${t("bookingProcessing")}`}
             </div>
 
             <div
               className={` ${
-                data?.currentBooking?.paymentStatus ===
-                "PaymentCompleted"
+                data?.currentBooking?.paymentStatus === "PaymentCompleted"
                   ? "bg-[#0b7911a2] "
                   : "bg-red-300" // Use the intended background color for confirmed bookings
               } text-white  px-4 py-1 lg:pt-2 text-center  rounded-full items-center lg:text-[14px] text-[11px] `}
             >
-              {data?.currentBooking?.paymentStatus ===
-              "PaymentCompleted"
+              {data?.currentBooking?.paymentStatus === "PaymentCompleted"
                 ? `${t("paymentPaid")}`
                 : `${t("pendingPaid")}`}
             </div>
@@ -114,11 +108,21 @@ const ProfileCard = ({data}) => {
               {t("cleaningTime")}
             </p>
             <div>
-              <h2 className="mb-3  lg:text-lg text-[12px] font-bold text-blue-900">
-                {data?.cleaningDurationInHours} Hours
-              </h2>
               <h2 className="mb-3 lg:text-lg text-[12px] font-semibold text-blue-900">
-                {formatDatewithTime(data?.currentBooking?.cleaningDate)}
+                {formatDateString(data?.currentBooking?.cleaningDate)}
+              </h2>
+
+              <h2 className="mb-3 lg:text-lg text-[12px] font-semibold text-blue-900">
+                {formatTime(dayjs(data?.currentBooking?.cleaningDate))} {" - "}
+                {formatTime(
+                  dayjs(data?.currentBooking?.cleaningDate).add(
+                    data?.cleaningDurationInHours,
+                    "hour"
+                  )
+                )}
+              </h2>
+              <h2 className="mb-3  lg:text-lg text-[12px] font-bold text-blue-900">
+                Time : {data?.cleaningDurationInHours} Hours
               </h2>
             </div>
           </div>
@@ -143,9 +147,7 @@ const ProfileCard = ({data}) => {
             <p>{data?.postalCode}</p>
           </div>
           <div className="flex items-center space-x-1">
-            {(data?.hasCats ||
-              data?.hasDogs ||
-              data?.hasOtherPets) && (
+            {(data?.hasCats || data?.hasDogs || data?.hasOtherPets) && (
               <>
                 <CheckIcon className="h-5 w-5 text-green-500" />
                 <span className="text-gray-700 text-sm font-medium">
@@ -169,15 +171,15 @@ const ProfileCard = ({data}) => {
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">{t("serviceFee")}</span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.currentBooking?.subscriptionPrice || "N/A"}{" "}
-                kr
+                {data?.currentBooking?.subscriptionPrice || "N/A"} kr
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700 text-sm">
-                {t("cleaning")}{""} {"Price"}
-                {data?.currentBooking?.subscriptionPrice}{" "}
-                kr/h x {data?.cleaningDurationInHours || "N/A"} h
+                {t("cleaning")}
+                {""} {"Price"}
+                {data?.currentBooking?.subscriptionPrice} kr/h x{" "}
+                {data?.cleaningDurationInHours || "N/A"} h
               </span>
               <span className="text-gray-900 text-sm font-medium">
                 {data?.currentBooking?.cleaningPrice || "N/A"} kr
@@ -202,8 +204,7 @@ const ProfileCard = ({data}) => {
                 {t("service.additionalFee")}
               </span>
               <span className="text-gray-900 text-sm font-medium">
-                {data?.currentBooking?.additionalCharges}{" "}
-                kr
+                {data?.currentBooking?.additionalCharges} kr
               </span>
             </div>
 
@@ -215,11 +216,16 @@ const ProfileCard = ({data}) => {
                 {data?.currentBooking?.remarks}{" "}
               </span>
             </div>
-          
+
             <div className="flex justify-between pt-2">
-              <span className="text-gray-800 text-lg font-bold">{t("service.before_rut")}</span>
+              <span className="text-gray-800 text-lg font-bold">
+                {t("service.before_rut")}
+              </span>
               <span className="text-2xl font-bold text-blue-800">
-                {data?.currentBooking?.cleaningPrice * 2 + data?.currentBooking?.additionalCharges + data?.currentBooking?.suppliesCharges} kr
+                {data?.currentBooking?.cleaningPrice * 2 +
+                  data?.currentBooking?.additionalCharges +
+                  data?.currentBooking?.suppliesCharges}{" "}
+                kr
               </span>
             </div>
 
@@ -230,8 +236,7 @@ const ProfileCard = ({data}) => {
               </span>
             </div>
 
-            {data?.currentBooking?.paymentStatus ===
-            "PaymentCompleted" ? (
+            {data?.currentBooking?.paymentStatus === "PaymentCompleted" ? (
               <div className="flex justify-between pt-2">
                 <span className="text-gray-800 text-lg font-bold">
                   TOTAL PAID
@@ -250,8 +255,7 @@ const ProfileCard = ({data}) => {
                   <span className="text-2xl font-bold text-blue-800">
                     {data?.currentBooking?.totalAmount} kr
                   </span>
-                  {data?.currentBooking?.bookingStatus ===
-                    "BookingServed" && (
+                  {data?.currentBooking?.bookingStatus === "BookingServed" && (
                     <button
                       className="bg-gradient-to-r from-primary  to-secondprimary hover:from-secondprimary 
                     hover:to-primary text-white text-sm normal lg:px-4 px-10 py-2 rounded-lg"
@@ -265,7 +269,9 @@ const ProfileCard = ({data}) => {
               </div>
             )}
 
-            <p className="text-center w-full font-semibold py-2">Org. No. 890114-4751</p>
+            <p className="text-center w-full font-semibold py-2">
+              Org. No. 890114-4751
+            </p>
           </div>
         </div>
       </CardContent>

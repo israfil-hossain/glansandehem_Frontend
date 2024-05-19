@@ -47,7 +47,7 @@
       "answer": " Rengöring av diskho, spis och fläktyta Ta bort fläckar på utsidan av mikrovågsugn, kylskåp och diskmaskin Torka av andra köksmaskiner (t.ex. kaffebryggare, brödrost, mixer) Damma av alla plana ytor (så högt som rengöringsmedlet når) Dammsugning av golv och mattor Fuktiga golvmoppningar (om golvmaterial lämpar sig för fuktmoppning) Torka av speglar och andra glasytor (exklusive fönster)"
     },
     {
-      "question": "Arbetsuppgifter ingår inte i vanlig städning",
+      "question": "Arbetsuppgifter ingår inte i van städning",
       "answer": "För att undvika förvirring ingår inte följande uppgifter i den beställda tjänsten. Torka/städa väggar och damma av bilder Avtorkning/rengöring av tak och andra ytor som inte kan nås utan specialutrustning Borttagning av extremt svåra fläckar Rengöring av golvbrunnen Rengöring av luktfällor Rengöring av ventilationsventiler och ventilationsöppningar Flytta tunga möbler och hushållsapparater Renoveringsstädning Städning efter renovering Rengöring av möbler"
     }
   ],
@@ -72,7 +72,7 @@
     "hourse": "timmar",
     "recommendation": "timmar (rekommendation)",
     "HowOften": "Hur ofta ska vi städa?",
-    "with_Glänsande hem": "Med Glänsande hem får du en vanlig städare !",
+    "with_Glänsande hem": "Med Glänsande hem får du en Van städare !",
     "mostpopular": "Mest populär",
     "ecofriendly_supplies": "Miljövänliga städmaterial",
     "eco_info": "miljövänliga och allergivänliga städmaterial ingår i din beställning! Har du en dammsugare, hink & mopp? Vi använder dem.",
