@@ -16,10 +16,15 @@ import TextField from "@mui/material/TextField";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import dateTimeValidation from "@/validations/service_validations/DateTimeValidation";
 import { Progress } from "../common/Progress";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dayjs.extend(utc);
+dayjs.extend(advancedFormat);
 
 export default function DateTime({ onSubmit, prevStep }) {
   const { formData, setFormData } = useFormData();
-  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
   const [error, setError] = useState("");
@@ -29,36 +34,7 @@ export default function DateTime({ onSubmit, prevStep }) {
     otherPets: false,
   });
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
-
-    // Handle date input specifically:
-    if (name === "startDate" && type === "datetime-local") {
-      const today = new Date().toISOString().slice(0, 16); // Get today's date in ISO format
-      e.target.min = today; // Set minimum selectable date to today
-
-      // Potentially add error handling for invalid date formats (optional):
-      try {
-        new Date(newValue); // Attempt to parse the date
-        setFormData((prev) => ({
-          ...prev,
-          [name]: newValue,
-        }));
-      } catch (err) {
-        console.error(
-          'Invalid date format for "startDate". Please use YYYY-MM-DDTHH:mm format.'
-        );
-        // Optionally display an error message to the user
-      }
-    } else {
-      // Handle other input types as usual
-      setFormData((prev) => ({
-        ...prev,
-        [name]: newValue,
-      }));
-    }
-  };
+  const currentDateTimeLocal = dayjs().format("YYYY-MM-DDTHH:mm");
 
   const handleSubmit = async (values) => {
     if (!formData.startDate) {
@@ -67,7 +43,6 @@ export default function DateTime({ onSubmit, prevStep }) {
       );
       return;
     }
-    // console.log("values", values)
 
     setFormData((prev) => ({
       ...prev,
@@ -82,7 +57,8 @@ export default function DateTime({ onSubmit, prevStep }) {
       <Formik
         initialValues={{
           address: formData?.address || "",
-          postalCode: formData?.postalCode || "",
+          postalCode: formData?.postalCode || null,
+          startDate: formData?.startDate || "",
         }}
         validationSchema={dateTimeValidation}
         onSubmit={handleSubmit}
@@ -96,18 +72,6 @@ export default function DateTime({ onSubmit, prevStep }) {
           handleSubmit,
           setFieldValue,
         }) => {
-          const filteredOptions = useMemo(() => {
-            if (!values.postalCode) return postalCodeData;
-
-            const postalCodeString = String(values.postalCode);
-
-            return postalCodeData.filter((option) =>
-              option.label
-                .toLowerCase()
-                .startsWith(postalCodeString.toLowerCase())
-            );
-          }, [values.postalCode]);
-
           return (
             <Form>
               {/* <>{JSON.stringify(values)}</> */}
@@ -189,15 +153,31 @@ export default function DateTime({ onSubmit, prevStep }) {
                     <span className="text-red-500">* </span>
                     {t("datetime.dateandtime")}
                   </label>
-                  <input
+                  <Field
                     id="date-time"
                     type="datetime-local"
                     name="startDate"
-                    defaultValue={formData?.startDate}
-                    className="py-3 px-5 border"
-                    onChange={handleInputChange}
-                    min={new Date().toISOString().slice(0, 16)}
+                    className={`py-3 px-5 border ${
+                      touched.startDate && errors.startDate
+                        ? "border-red-500"
+                        : ""
+                    }`}
+                    min={currentDateTimeLocal}
+                    value={dayjs(values.startDate).format("YYYY-MM-DDTHH:mm")}
+                    onChange={(e) => {
+                      const localDate = dayjs(e.target.value);
+                      const utcDate = localDate
+                        .utc()
+                        .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+                      setFieldValue("startDate", utcDate);
+                      setFormData({ ...formData, startDate: utcDate });
+                    }}
                   />
+                  {touched.startDate && errors.startDate && (
+                    <p className="mt-2 text-sm text-red-600 ">
+                      {errors.startDate}
+                    </p>
+                  )}
                 </div>
                 <PetChecked
                   pets={pets}
