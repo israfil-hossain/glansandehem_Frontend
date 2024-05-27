@@ -97,6 +97,7 @@ const Home = () => {
         hasDogs: formData?.hasDogs,
         hasOtherPets: formData?.hasOtherPets,
       };
+  
 
       await spaceCreate(payload); // Trigger the mutation with form data
     } catch (error) {

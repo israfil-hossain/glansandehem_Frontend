@@ -14,7 +14,7 @@ export const FormDataProvider = ({ children }) => {
   const [formData, setFormData] = useState({
     areaInSquareMeters: parsedFormData?.size, 
     cleaningFrequency: "",
-    postalCode: parsedFormData?.postCode, 
+    postalCode: null, 
     address: "",
     cleaningDurationInHours: cleanDuration,
     cleaningPrice: "",
